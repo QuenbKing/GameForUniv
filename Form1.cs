@@ -10,6 +10,7 @@ using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.TrayNotify;
 
 namespace Game
 {
@@ -22,16 +23,16 @@ namespace Game
         private static bool isPress;
         KeyEventArgs Key;
         int _startDraw;
-        private List<PictureBox> objects;
+        private static List<PictureBox> objects;
         public Form1()
         {
             DoubleBuffered = true;
             InitializeComponent();
             objects = new List<PictureBox>();
-            CreateObstacle();
-            playerImg = new Bitmap("E:\\GameForUniv\\Game\\ImagesForGame\\VinniPuh2.png");
+            playerImg = new Bitmap("E:\\GameForUniv\\Game\\ImagesForGame\\VinniPuhSmall.png");
             this.Height = 1080;
             this.Width = 1920;
+            CreateObstacle();
             player = new GameModel(new Size(playerImg.Width / 2, playerImg.Height), Width / 2 - playerImg.Width / 2, Height / 2, playerImg);
             background = new Bitmap("E:\\GameForUniv\\Game\\ImagesForGame\\oblaka2.png");
             controller = new Controller(player);
@@ -42,14 +43,14 @@ namespace Game
 
             var timer1 = new Timer
             {
-                Interval = 1
+                Interval = 10
             };
             timer1.Tick += Timer1_Tick;
             timer1.Start();
 
             var timer2 = new Timer
             {
-                Interval = 1
+                Interval = 10
             };
             timer2.Tick += Timer2_Tick;
             timer2.Start();
@@ -67,11 +68,11 @@ namespace Game
         private void OnPaint(object sender, PaintEventArgs e)
         {
             var gr = e.Graphics;
-            for (int i = 0; i < 3; i++)
+            for (int i = 0; i < 2; i++)
             {
                 gr.DrawImage(background, 0, StartDraw + background.Height * i);
             }
-            gr.DrawImage(player.playerImage, player.x, player.y, new Rectangle(new Point(125 * player.currFrame), player.size), GraphicsUnit.Pixel);
+            gr.DrawImage(player.playerImage, player.x, player.y, new Rectangle(new Point(100 * player.currFrame), player.size), GraphicsUnit.Pixel);
         }
 
         private void StopMove(object sender, KeyEventArgs e)
@@ -93,43 +94,84 @@ namespace Game
             {
                 controller.Move(sender, Key);
             }
-            Invalidate();
         }
 
         private void Timer2_Tick(object sender, EventArgs e)
         {
-            Random rnd = new Random();
-            List<PictureBox> Obstacles = objects.Take(rnd.Next(1, 5)).ToList();
-            MoveObstacle(10, Obstacles);
+            MoveObstacles(10);
+            Invalidate();
         }
 
-        private void MoveObstacle(int speed, List<PictureBox> obstacles)
+
+        private void MoveObstacles(int speed)
         {
             var rnd = new Random();
-            foreach (var obstacle in obstacles)
+            var e = new PictureBox();
+            foreach (var obstacle in objects)
             {
-                obstacle.Location = new Point(obstacle.Location.X, obstacle.Location.Y + speed);;
+                obstacle.Location = new Point(obstacle.Location.X, obstacle.Location.Y + speed);
                 if (obstacle.Location.Y >= this.Height)
                 {
-                    obstacle.Size = new Size(rnd.Next(55, 220), rnd.Next(55, 220));
-                    obstacle.Location = new Point(rnd.Next(0, Width - obstacle.Width), -obstacle.Height);
+                    ReCreateImage(obstacle, 0, 0);
+                    obstacle.Location = new Point(GiveRndNumber(e), -rnd.Next(100, 600));
                 }
+                e = obstacle;
             }
+        }
+
+        private void ReCreateImage(PictureBox obstacle, int width, int height)
+        {
+            var rnd = new Random();
+            string path = @"E:\GameForUniv\Game\Obstacles\";
+            string fileName = rnd.Next(1, 4).ToString();
+            switch (fileName)
+            {
+                case "1":
+                    width = rnd.Next(102, 205);
+                    height = rnd.Next(31, 62);
+                    break;
+                case "2":
+                    width = rnd.Next(100, 200);
+                    height = width;
+                    break;
+                case "3":
+                    width = rnd.Next(115, 230);
+                    height = width;
+                    break;
+            }
+            obstacle.BackColor = Color.Transparent;
+            obstacle.Image = new Bitmap(path + fileName + ".png");
+            obstacle.Size = new Size(width, height);
         }
 
         private void CreateObstacle()
         {
             Random rnd = new Random();
-            for(int i = 0; i < 5; i++)
+            for (int i = 0; i < 5; i++)
             {
                 PictureBox newObject = new PictureBox();
-                newObject.Image = Image.FromFile("E:\\GameForUniv\\Game\\ImagesForGame\\wall.png");
                 newObject.SizeMode = PictureBoxSizeMode.StretchImage;
-                newObject.Size = new Size(rnd.Next(55, 220), rnd.Next(55, 220));
-                newObject.Location = new Point(rnd.Next(0, Width - newObject.Width), -newObject.Height);
+                ReCreateImage(newObject, 0, 0);
+                if (i > 0)
+                    newObject.Location = new Point(GiveRndNumber(objects[i-1]), -rnd.Next(100, 600));
+                else
+                    newObject.Location = new Point(rnd.Next(0, Width - newObject.Width), -rnd.Next(100, 600));
                 Controls.Add(newObject);
                 objects.Add(newObject);
             }
+        }
+
+        private int GiveRndNumber(PictureBox OldObject)
+        {
+            var exclude = new HashSet<int>();
+            for (int j = OldObject.Location.X-300 ; j <= OldObject.Location.X + 300; j++)
+            {
+                exclude.Add(j);
+            }
+            var range = Enumerable.Range(0, Width - OldObject.Width).Where(i => !exclude.Contains(i));
+            var rnd = new Random();
+            int index = rnd.Next(0, Width - OldObject.Width - exclude.Count);
+            return range.ElementAt(index);
         }
 
         static void Main()
