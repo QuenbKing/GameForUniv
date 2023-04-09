@@ -24,6 +24,8 @@ namespace Game
         KeyEventArgs Key;
         int _startDraw;
         private static List<PictureBox> objects;
+        private static int score;
+        private static Label scores;
         public Form1()
         {
             DoubleBuffered = true;
@@ -42,6 +44,15 @@ namespace Game
             KeyDown += new KeyEventHandler(StartMove);
             KeyUp += new KeyEventHandler(StopMove);
 
+            scores = new Label
+            {
+                Size = new Size(1000, 15),
+                Text = $"scores: {score}",
+                Location = new Point(Width / 2, 0),
+                BackColor = Color.Transparent
+            };
+            Controls.Add(scores);
+
             var timer1 = new Timer
             {
                 Interval = 10
@@ -55,6 +66,13 @@ namespace Game
             };
             timer2.Tick += Timer2_Tick;
             timer2.Start();
+
+            var timer3 = new Timer
+            {
+                Interval = 2000
+            };
+            timer3.Tick += Timer3_Tick;
+            timer3.Start();
         }
         int StartDraw
         {
@@ -109,6 +127,12 @@ namespace Game
             Invalidate();
         }
 
+        private void Timer3_Tick(object sender, EventArgs e)
+        {
+            score += 2;
+            scores.Text = $"scores: {score}";
+        }
+
 
         private void MoveObstacles(int speed)
         {
@@ -119,8 +143,8 @@ namespace Game
                 {
                     ReCreateImage(obstacle, 0, 0);
                 }
-                //if (!CheckContactWithPlayer(obstacle))
-                //    throw new ArgumentException();
+                if (!CheckContactWithPlayer(obstacle))
+                    throw new ArgumentException();
             }
         }
 
