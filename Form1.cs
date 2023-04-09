@@ -34,6 +34,7 @@ namespace Game
             this.Width = 1920;
             CreateObstacle();
             player = new GameModel(new Size(playerImg.Width / 2, playerImg.Height), Width / 2 - playerImg.Width / 2, Height / 2, playerImg);
+            Resize += new EventHandler(MForm_Resize);
             background = new Bitmap("E:\\GameForUniv\\Game\\ImagesForGame\\oblaka2.png");
             controller = new Controller(player);
             StartDraw = 0;
@@ -63,6 +64,12 @@ namespace Game
                 _startDraw = value;
                 if (_startDraw > 0) _startDraw -= background.Height;
             }
+        }
+
+        private void MForm_Resize(object sender, EventArgs e)
+        {
+            player.x = Width / 2 - playerImg.Width / 2;
+            player.y = Height / 2;
         }
 
         private void OnPaint(object sender, PaintEventArgs e)
@@ -105,17 +112,15 @@ namespace Game
 
         private void MoveObstacles(int speed)
         {
-            var rnd = new Random();
-            var e = new PictureBox();
             foreach (var obstacle in objects)
             {
                 obstacle.Location = new Point(obstacle.Location.X, obstacle.Location.Y + speed);
                 if (obstacle.Location.Y >= this.Height)
                 {
                     ReCreateImage(obstacle, 0, 0);
-                    obstacle.Location = new Point(GiveRndNumber(e), -rnd.Next(100, 600));
                 }
-                e = obstacle;
+                //if (!CheckContactWithPlayer(obstacle))
+                //    throw new ArgumentException();
             }
         }
 
@@ -123,6 +128,9 @@ namespace Game
         {
             var rnd = new Random();
             string path = @"E:\GameForUniv\Game\Obstacles\";
+            Rectangle newPosition;
+            Size newSize;
+            Point newPoint;
             string fileName = rnd.Next(1, 4).ToString();
             switch (fileName)
             {
@@ -139,9 +147,16 @@ namespace Game
                     height = width;
                     break;
             }
-            obstacle.BackColor = Color.Transparent;
             obstacle.Image = new Bitmap(path + fileName + ".png");
-            obstacle.Size = new Size(width, height);
+            do
+            {
+                newSize = new Size(width, height);
+                newPoint = new Point(rnd.Next(0, Width - obstacle.Width), -rnd.Next(100, 600));
+                newPosition = new Rectangle(newPoint, newSize);
+            } while (objects.Any(box => box.Bounds.IntersectsWith(newPosition)));
+            obstacle.Size = newSize;
+            obstacle.Location = newPoint;
+            obstacle.BackColor = Color.Transparent;
         }
 
         private void CreateObstacle()
@@ -152,26 +167,19 @@ namespace Game
                 PictureBox newObject = new PictureBox();
                 newObject.SizeMode = PictureBoxSizeMode.StretchImage;
                 ReCreateImage(newObject, 0, 0);
-                if (i > 0)
-                    newObject.Location = new Point(GiveRndNumber(objects[i-1]), -rnd.Next(100, 600));
-                else
-                    newObject.Location = new Point(rnd.Next(0, Width - newObject.Width), -rnd.Next(100, 600));
                 Controls.Add(newObject);
                 objects.Add(newObject);
             }
         }
 
-        private int GiveRndNumber(PictureBox OldObject)
+        private bool CheckContactWithPlayer(PictureBox obstacle)
         {
-            var exclude = new HashSet<int>();
-            for (int j = OldObject.Location.X-300 ; j <= OldObject.Location.X + 300; j++)
-            {
-                exclude.Add(j);
-            }
-            var range = Enumerable.Range(0, Width - OldObject.Width).Where(i => !exclude.Contains(i));
-            var rnd = new Random();
-            int index = rnd.Next(0, Width - OldObject.Width - exclude.Count);
-            return range.ElementAt(index);
+            if (obstacle.Location.X < player.x + player.size.Width
+                && player.x < obstacle.Location.X + obstacle.Width
+                && obstacle.Location.Y < player.y + player.size.Height
+                && player.y < obstacle.Location.Y + obstacle.Height)
+                return false;
+            else return true;
         }
 
         static void Main()
