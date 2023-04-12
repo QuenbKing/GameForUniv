@@ -28,7 +28,7 @@ namespace Game
         private static Label scores;
         public Form1()
         {
-            DoubleBuffered = true;
+            DoubleBuffered = true;;
             InitializeComponent();
             objects = new List<PictureBox>();
             playerImg = new Bitmap("E:\\GameForUniv\\Game\\ImagesForGame\\VinniPuhSmall.png");
@@ -46,10 +46,10 @@ namespace Game
 
             scores = new Label
             {
-                Size = new Size(1000, 15),
+                Size = new Size(60, 15),
                 Text = $"scores: {score}",
-                Location = new Point(Width / 2, 0),
-                BackColor = Color.Transparent
+                Location = new Point(0,0),
+                BackColor = Color.Green
             };
             Controls.Add(scores);
 
@@ -69,7 +69,7 @@ namespace Game
 
             var timer3 = new Timer
             {
-                Interval = 2000
+                Interval = 1000
             };
             timer3.Tick += Timer3_Tick;
             timer3.Start();
@@ -171,6 +171,7 @@ namespace Game
                     height = width;
                     break;
             }
+            obstacle.SizeMode = PictureBoxSizeMode.StretchImage;
             obstacle.Image = new Bitmap(path + fileName + ".png");
             do
             {
@@ -189,7 +190,6 @@ namespace Game
             for (int i = 0; i < 5; i++)
             {
                 PictureBox newObject = new PictureBox();
-                newObject.SizeMode = PictureBoxSizeMode.StretchImage;
                 ReCreateImage(newObject, 0, 0);
                 Controls.Add(newObject);
                 objects.Add(newObject);
@@ -204,11 +204,6 @@ namespace Game
                 && player.y < obstacle.Location.Y + obstacle.Height)
                 return false;
             else return true;
-        }
-
-        static void Main()
-        {
-            Application.Run(new Form1());
         }
     }
 }
