@@ -62,9 +62,10 @@ namespace Game
 
         private void LoadGame(object sender, EventArgs e)
         {
+            Hide();
             Form1 gameWindow = new Form1();
             gameWindow.ShowDialog();
-            this.Close();
+            Close();
         }
 
         private void CloseGame(object sender, EventArgs e)

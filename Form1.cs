@@ -23,18 +23,16 @@ namespace Game
         private static bool isPress;
         KeyEventArgs Key;
         int _startDraw;
-        private static List<PictureBox> objects;
         private static int score;
         private static Label scores;
         public Form1()
         {
-            DoubleBuffered = true;;
+            DoubleBuffered = true;
             InitializeComponent();
-            objects = new List<PictureBox>();
+            Init();
             playerImg = new Bitmap("E:\\GameForUniv\\Game\\ImagesForGame\\VinniPuhSmall.png");
             this.Height = 1080;
             this.Width = 1920;
-            CreateObstacle();
             player = new GameModel(new Size(playerImg.Width / 2, playerImg.Height), Width / 2 - playerImg.Width / 2, Height / 2, playerImg);
             Resize += new EventHandler(MForm_Resize);
             background = new Bitmap("E:\\GameForUniv\\Game\\ImagesForGame\\oblaka2.png");
@@ -46,9 +44,9 @@ namespace Game
 
             scores = new Label
             {
-                Size = new Size(60, 15),
+                Size = new Size(120, 15),
                 Text = $"scores: {score}",
-                Location = new Point(0,0),
+                Location = new Point(0, 0),
                 BackColor = Color.Green
             };
             Controls.Add(scores);
@@ -74,6 +72,14 @@ namespace Game
             timer3.Tick += Timer3_Tick;
             timer3.Start();
         }
+
+
+        public void Init()
+        {
+            ObstaclesController.obstacles = new List<Obstacle>();
+            ObstaclesController.CreateObstacle();
+        }
+
         int StartDraw
         {
             get => _startDraw;
@@ -98,6 +104,10 @@ namespace Game
                 gr.DrawImage(background, 0, StartDraw + background.Height * i);
             }
             gr.DrawImage(player.playerImage, player.x, player.y, new Rectangle(new Point(100 * player.currFrame), player.size), GraphicsUnit.Pixel);
+            foreach(var obs in ObstaclesController.obstacles)
+            {
+                obs.DrawSprite(gr);
+            }
         }
 
         private void StopMove(object sender, KeyEventArgs e)
@@ -123,7 +133,7 @@ namespace Game
 
         private void Timer2_Tick(object sender, EventArgs e)
         {
-            MoveObstacles(10);
+            ObstaclesController.MoveObstacles(player);
             Invalidate();
         }
 
@@ -131,79 +141,6 @@ namespace Game
         {
             score += 2;
             scores.Text = $"scores: {score}";
-        }
-
-
-        private void MoveObstacles(int speed)
-        {
-            foreach (var obstacle in objects)
-            {
-                obstacle.Location = new Point(obstacle.Location.X, obstacle.Location.Y + speed);
-                if (obstacle.Location.Y >= this.Height)
-                {
-                    ReCreateImage(obstacle, 0, 0);
-                }
-                if (!CheckContactWithPlayer(obstacle))
-                    throw new ArgumentException();
-            }
-        }
-
-        private void ReCreateImage(PictureBox obstacle, int width, int height)
-        {
-            var rnd = new Random();
-            string path = @"E:\GameForUniv\Game\Obstacles\";
-            Rectangle newPosition;
-            Size newSize;
-            Point newPoint;
-            string fileName = rnd.Next(1, 4).ToString();
-            switch (fileName)
-            {
-                case "1":
-                    width = rnd.Next(102, 205);
-                    height = rnd.Next(31, 62);
-                    break;
-                case "2":
-                    width = rnd.Next(100, 200);
-                    height = width;
-                    break;
-                case "3":
-                    width = rnd.Next(115, 230);
-                    height = width;
-                    break;
-            }
-            obstacle.SizeMode = PictureBoxSizeMode.StretchImage;
-            obstacle.Image = new Bitmap(path + fileName + ".png");
-            do
-            {
-                newSize = new Size(width, height);
-                newPoint = new Point(rnd.Next(0, Width - obstacle.Width), -rnd.Next(100, 600));
-                newPosition = new Rectangle(newPoint, newSize);
-            } while (objects.Any(box => box.Bounds.IntersectsWith(newPosition)));
-            obstacle.Size = newSize;
-            obstacle.Location = newPoint;
-            obstacle.BackColor = Color.Transparent;
-        }
-
-        private void CreateObstacle()
-        {
-            Random rnd = new Random();
-            for (int i = 0; i < 5; i++)
-            {
-                PictureBox newObject = new PictureBox();
-                ReCreateImage(newObject, 0, 0);
-                Controls.Add(newObject);
-                objects.Add(newObject);
-            }
-        }
-
-        private bool CheckContactWithPlayer(PictureBox obstacle)
-        {
-            if (obstacle.Location.X < player.x + player.size.Width
-                && player.x < obstacle.Location.X + obstacle.Width
-                && obstacle.Location.Y < player.y + player.size.Height
-                && player.y < obstacle.Location.Y + obstacle.Height)
-                return false;
-            else return true;
         }
     }
 }
