@@ -10,13 +10,15 @@ namespace Game
         private static Button startButton;
         private static Button exitButton;
         private static Image menuImage;
+        private static Label HighSroce;
+        private static Label Money;
         public StartScreen()
         {
             InitializeComponent();
             BackColor = Color.LightSkyBlue;
             this.Height = 1080;
             this.Width = 1920;
-            menuImage = new Bitmap("E:\\GameForUniv\\Game\\StartFormImages\\Med.png");
+            menuImage = new Bitmap("D:\\GameForUniv\\Game\\StartFormImages\\Med.png");
             image = new PictureBox
             {
                 Location = new Point(Width / 2 - menuImage.Width / 2, 0),
@@ -45,6 +47,24 @@ namespace Game
             };
             Controls.Add(exitButton);
 
+            HighSroce = new Label
+            {
+                Location = new Point(image.Location.X, exitButton.Bottom + Height / 20),
+                Size = new Size(image.Width, image.Height / 3),
+                Text = $"HighScore:{ObstaclesController.score}",
+                BackColor = Color.Transparent
+            };
+            Controls.Add(HighSroce);
+
+            Money = new Label
+            {
+                Location = new Point(image.Location.X, HighSroce.Bottom + Height / 20),
+                Size = new Size(image.Width, image.Height / 3),
+                Text = $"Money:{CoinsController.money}",
+                BackColor = Color.Transparent
+            };
+            Controls.Add (Money);
+
             startButton.Click += new EventHandler(LoadGame);
             exitButton.Click += new EventHandler(CloseGame);
             Resize += new EventHandler(Form_Resize);
@@ -58,6 +78,10 @@ namespace Game
             startButton.Size = new Size(image.Width, image.Height / 3);
             exitButton.Location = new Point(image.Location.X, startButton.Bottom + Height / 20);
             exitButton.Size = new Size(image.Width, image.Height / 3);
+            HighSroce.Location = new Point(image.Location.X, exitButton.Bottom + Height / 20);
+            HighSroce.Size = new Size(image.Width, image.Height / 3);
+            Money.Location = new Point(image.Location.X, HighSroce.Bottom + Height / 20);
+            Money.Size = new Size(image.Width, image.Height / 3);
         }
 
         private void LoadGame(object sender, EventArgs e)
@@ -70,7 +94,7 @@ namespace Game
 
         private void CloseGame(object sender, EventArgs e)
         {
-            Close();
+            Application.Exit();
         }
     }
 }

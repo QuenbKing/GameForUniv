@@ -17,7 +17,7 @@ namespace Game
         
         public Obstacle()
         {
-            speed = 10;
+            speed = 8;
         }
 
         public void DrawSprite(Graphics gr)

@@ -7,15 +7,11 @@ using System.Windows.Forms;
 
 namespace Game
 {
-    internal class Controller
+    public static class Controller
     {
-        public GameModel player;
-        public Controller(GameModel model)
-        {
-            player = model;
-        }
+        public static GameModel player;
 
-        public void Move(object sender, KeyEventArgs e)
+        public static void Move(object sender, KeyEventArgs e)
         {
             switch (e.KeyCode.ToString())
             {
@@ -33,6 +29,7 @@ namespace Game
                 case "S":
                     player.MoveDown();
                     break;
+   
             }
         }
     }

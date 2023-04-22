@@ -1,16 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Drawing.Imaging;
-using System.IO;
-using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement.TrayNotify;
 
 namespace Game
 {
@@ -18,47 +9,48 @@ namespace Game
     {
         private static Image playerImg;
         private static Image background;
-        Controller controller;
         private static GameModel player;
         private static bool isPress;
         KeyEventArgs Key;
         int _startDraw;
-        private static int score;
         private static Label scores;
+        private static Timer timer2;
         public Form1()
         {
             DoubleBuffered = true;
             InitializeComponent();
             Init();
-            playerImg = new Bitmap("E:\\GameForUniv\\Game\\ImagesForGame\\VinniPuhSmall.png");
+            playerImg = new Bitmap("D:\\GameForUniv\\Game\\ImagesForGame\\VinniPuhSmall.png");
             this.Height = 1080;
             this.Width = 1920;
             player = new GameModel(new Size(playerImg.Width / 2, playerImg.Height), Width / 2 - playerImg.Width / 2, Height / 2, playerImg);
             Resize += new EventHandler(MForm_Resize);
-            background = new Bitmap("E:\\GameForUniv\\Game\\ImagesForGame\\oblaka2.png");
-            controller = new Controller(player);
+            background = new Bitmap("D:\\GameForUniv\\Game\\ImagesForGame\\oblaka2.png");
             StartDraw = 0;
             Paint += new PaintEventHandler(OnPaint);
             KeyDown += new KeyEventHandler(StartMove);
             KeyUp += new KeyEventHandler(StopMove);
-
             scores = new Label
             {
-                Size = new Size(120, 15),
-                Text = $"scores: {score}",
+                Size = new Size(150, 30),
+                Font = new Font("Tahoma", 20),
+                Text = $"{ObstaclesController.score}",
+                TextAlign = ContentAlignment.TopCenter,
                 Location = new Point(0, 0),
-                BackColor = Color.Green
+                Image = new Bitmap("D:\\GameForUniv\\Game\\ImagesForGame\\scores.png"),
+                ImageAlign = ContentAlignment.TopLeft,
+                BackColor = Color.Transparent
             };
             Controls.Add(scores);
 
             var timer1 = new Timer
             {
-                Interval = 10
+                Interval = 15
             };
             timer1.Tick += Timer1_Tick;
             timer1.Start();
 
-            var timer2 = new Timer
+            timer2 = new Timer
             {
                 Interval = 10
             };
@@ -71,6 +63,13 @@ namespace Game
             };
             timer3.Tick += Timer3_Tick;
             timer3.Start();
+
+            var timer4 = new Timer
+            {
+                Interval = 10
+            };
+            timer4.Tick += Timer4_Tick;
+            timer4.Start();
         }
 
 
@@ -78,6 +77,8 @@ namespace Game
         {
             ObstaclesController.obstacles = new List<Obstacle>();
             ObstaclesController.CreateObstacle();
+            CoinsController.coinsList = new List<Coins>();
+            CoinsController.CreateCoins();
         }
 
         int StartDraw
@@ -108,6 +109,13 @@ namespace Game
             {
                 obs.DrawSprite(gr);
             }
+            if(CoinsController.coinsList.Count > 0)
+            {
+                for (int i = 0; i < CoinsController.coinsCount; i++)
+                {
+                    CoinsController.coinsList[i].DrawSprite(gr);
+                }
+            }
         }
 
         private void StopMove(object sender, KeyEventArgs e)
@@ -127,20 +135,41 @@ namespace Game
             StartDraw += 3;
             if (isPress)
             {
-                controller.Move(sender, Key);
+                Controller.player = player;
+                Controller.Move(sender, Key);
             }
         }
 
         private void Timer2_Tick(object sender, EventArgs e)
         {
-            ObstaclesController.MoveObstacles(player);
+            if (ObstaclesController.checker == false)
+            {
+                timer2.Stop();
+                ObstaclesController.checker = true;
+                var res = MessageBox.Show("Вы проиграли!!!", "Game over", MessageBoxButtons.OK);
+                if (res == DialogResult.OK)
+                {
+                    //Dispose();
+                    //StartScreen screen = new StartScreen(); (очки будут копиться и деньги тоже)
+                    //screen.ShowDialog(); 
+                    Application.Restart();
+                }
+            }
             Invalidate();
+            ObstaclesController.MoveObstacles(player);
         }
 
         private void Timer3_Tick(object sender, EventArgs e)
         {
-            score += 2;
-            scores.Text = $"scores: {score}";
+            ObstaclesController.score += 2;
+            scores.Text = $"{ObstaclesController.score}";
+            ObstaclesController.SpeedUp();
+        }
+
+        private void Timer4_Tick(object sender, EventArgs e)
+        {
+            CoinsController.CreateCoins();
+            CoinsController.MoveCoins(player);
         }
     }
 }
