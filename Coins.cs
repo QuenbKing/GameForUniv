@@ -16,8 +16,10 @@ namespace Game
 
         public Coins()
         {
+            Directory.sprites = new Dictionary<string, Bitmap>();
+            Directory.MakeDir("ImagesForGame");
             size = new Size(100, 75);
-            sprite = new Bitmap("D:\\GameForUniv\\Game\\ImagesForGame\\Money.png");
+            sprite = Directory.sprites["Money.png"];
             speed = 14;
         }
 
@@ -26,7 +28,7 @@ namespace Game
             gr.DrawImage(sprite, location.X, location.Y, size.Width, size.Height);
         }
 
-        public bool CheckContactPlayerWithCoin(GameModel player)
+        public bool CheckContactPlayerWithCoin(Player player)
         {
             if (location.X < player.x + player.size.Width
                 && player.x < location.X + size.Width

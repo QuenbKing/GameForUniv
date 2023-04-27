@@ -1,6 +1,6 @@
 ﻿namespace Game
 {
-    partial class StartScreen
+    partial class Store
     {
         /// <summary>
         /// Required designer variable.
@@ -30,13 +30,13 @@
         {
             this.SuspendLayout();
             // 
-            // StartScreen
+            // Store
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1453, 635);
-            this.Name = "StartScreen";
-            this.Text = "StartScreen";
+            this.ClientSize = new System.Drawing.Size(1448, 633);
+            this.Name = "Store";
+            this.Text = "Store";
             this.ResumeLayout(false);
 
         }

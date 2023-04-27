@@ -1,0 +1,10 @@
+E:\GameForUniv\Game\bin\Release\Game.exe.config
+E:\GameForUniv\Game\bin\Release\Game.exe
+E:\GameForUniv\Game\bin\Release\Game.pdb
+E:\GameForUniv\Game\obj\Release\Game.csproj.AssemblyReference.cache
+E:\GameForUniv\Game\obj\Release\Game.csproj.SuggestedBindingRedirects.cache
+E:\GameForUniv\Game\obj\Release\Game.Form1.resources
+E:\GameForUniv\Game\obj\Release\Game.csproj.GenerateResource.cache
+E:\GameForUniv\Game\obj\Release\Game.csproj.CoreCompileInputs.cache
+E:\GameForUniv\Game\obj\Release\Game.exe
+E:\GameForUniv\Game\obj\Release\Game.pdb

@@ -11,16 +11,11 @@ namespace Game
         public static List<Obstacle> obstacles;
         public static bool checker = true;
         public static int score;
-        public static int limScore = 10;
-        public static void MoveObstacles(GameModel player)
+        public static int limScore = 30;
+        public static void MoveObstacles(Player player)
         {
             foreach (var obstacle in obstacles)
             {
-                if (obstacle.CheckContactWithPlayer(player))
-                {
-                    player.playerImage = new Bitmap("D:\\GameForUniv\\Game\\ImagesForGame\\vinniUmer.png");
-                    checker = false;
-                }
                 obstacle.y += obstacle.speed;
                 if (obstacle.y >= Screen.PrimaryScreen.Bounds.Height)
                 {
@@ -28,6 +23,19 @@ namespace Game
                 }
             }
         }
+
+        public static void CheckContact(Player player)
+        {
+            foreach(var obstacle in obstacles)
+            {
+                if (obstacle.CheckContactWithPlayer(player))
+                {
+                    //player.playerImage = new Bitmap("D:\\GameForUniv\\Game\\ImagesForGame\\vinniUmer.png");
+                    checker = false;
+                }
+            }
+        }
+
         public static void SpeedUp()
         {
             if(score == limScore)
@@ -36,11 +44,11 @@ namespace Game
                 {
                     obstacles[i].speed++;
                 }
-                limScore += 50;
+                limScore += 30;
             };
         }
 
-        private static void ReCreateImage(Obstacle obs, int width, int height, Random rnd)
+        public static void ReCreateImage(Obstacle obs, int width, int height, Random rnd)
         {
             Size newSize;
             Point newPoint;
@@ -73,11 +81,10 @@ namespace Game
 
         public static void CreateObstacle()
         {
-            var rnd = new Random();
             for (int i = 0; i < 5; i++)
             {
                 var object1 = new Obstacle();
-                ReCreateImage(object1, 0, 0, rnd);
+                ReCreateImage(object1, 0, 0, new Random());
                 obstacles.Add(object1);
             }
         }

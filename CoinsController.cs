@@ -1,9 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Game
@@ -32,7 +29,7 @@ namespace Game
             coin.location = new Point(rnd.Next(0, Screen.PrimaryScreen.Bounds.Width - coin.size.Width), -rnd.Next(200, 650));
         }
 
-        public static void MoveCoins(GameModel player)
+        public static void MoveCoins(Player player)
         {
             if(coinsList.Count > 0)
             {

@@ -9,27 +9,44 @@ namespace Game
     {
         private static Image playerImg;
         private static Image background;
-        private static GameModel player;
+        public Player player;
         private static bool isPress;
-        KeyEventArgs Key;
-        int _startDraw;
+        private static KeyEventArgs Key;
+        private static int _startDraw;
         private static Label scores;
-        private static Timer timer2;
+        private static List<Timer> timers;
         public Form1()
         {
             DoubleBuffered = true;
             InitializeComponent();
             Init();
-            playerImg = new Bitmap("D:\\GameForUniv\\Game\\ImagesForGame\\VinniPuhSmall.png");
+        }
+
+
+        public void Init()
+        {
+            Directory.sprites = new Dictionary<string, Bitmap>();
+            Directory.MakeDir("ImagesForGame");
+            ObstaclesController.obstacles = new List<Obstacle>();
+            CoinsController.coinsList = new List<Coins>();
+            ObstaclesController.CreateObstacle();
+            CoinsController.CreateCoins();
+            ObstaclesController.score = 0;
+            isPress = false;
+            timers = new List<Timer>();
             this.Height = 1080;
             this.Width = 1920;
-            player = new GameModel(new Size(playerImg.Width / 2, playerImg.Height), Width / 2 - playerImg.Width / 2, Height / 2, playerImg);
+            playerImg = Directory.sprites["VinniPuhSmall 2.png"];
+            player = new Player(new Size(playerImg.Width / 2, playerImg.Height), Width / 2 - playerImg.Width / 2, Height / 2, playerImg);
+            player.CreateHearts(Player.heartsCount);
+            player.CreateBoosts(Player.speedBoostCount);
             Resize += new EventHandler(MForm_Resize);
-            background = new Bitmap("D:\\GameForUniv\\Game\\ImagesForGame\\oblaka2.png");
+            background = Directory.sprites["oblaka2.png"];
             StartDraw = 0;
             Paint += new PaintEventHandler(OnPaint);
             KeyDown += new KeyEventHandler(StartMove);
             KeyUp += new KeyEventHandler(StopMove);
+
             scores = new Label
             {
                 Size = new Size(150, 30),
@@ -37,7 +54,7 @@ namespace Game
                 Text = $"{ObstaclesController.score}",
                 TextAlign = ContentAlignment.TopCenter,
                 Location = new Point(0, 0),
-                Image = new Bitmap("D:\\GameForUniv\\Game\\ImagesForGame\\scores.png"),
+                Image = Directory.sprites["scores.png"],
                 ImageAlign = ContentAlignment.TopLeft,
                 BackColor = Color.Transparent
             };
@@ -49,13 +66,15 @@ namespace Game
             };
             timer1.Tick += Timer1_Tick;
             timer1.Start();
+            timers.Add(timer1);
 
-            timer2 = new Timer
+            var timer2 = new Timer
             {
                 Interval = 10
             };
             timer2.Tick += Timer2_Tick;
             timer2.Start();
+            timers.Add(timer2);
 
             var timer3 = new Timer
             {
@@ -63,6 +82,7 @@ namespace Game
             };
             timer3.Tick += Timer3_Tick;
             timer3.Start();
+            timers.Add(timer3);
 
             var timer4 = new Timer
             {
@@ -70,15 +90,16 @@ namespace Game
             };
             timer4.Tick += Timer4_Tick;
             timer4.Start();
-        }
+            timers.Add(timer4);
 
-
-        public void Init()
-        {
-            ObstaclesController.obstacles = new List<Obstacle>();
-            ObstaclesController.CreateObstacle();
-            CoinsController.coinsList = new List<Coins>();
-            CoinsController.CreateCoins();
+            
+            var timer5 = new Timer
+            {
+                Interval = 10
+            };
+            timer5.Tick += Timer5_Tick;
+            timer5.Start();
+            timers.Add(timer5);
         }
 
         int StartDraw
@@ -104,7 +125,7 @@ namespace Game
             {
                 gr.DrawImage(background, 0, StartDraw + background.Height * i);
             }
-            gr.DrawImage(player.playerImage, player.x, player.y, new Rectangle(new Point(100 * player.currFrame), player.size), GraphicsUnit.Pixel);
+            gr.DrawImage(player.playerImage, player.x, player.y, new Rectangle(new Point(89 * player.currFrame), player.size), GraphicsUnit.Pixel);
             foreach(var obs in ObstaclesController.obstacles)
             {
                 obs.DrawSprite(gr);
@@ -115,6 +136,14 @@ namespace Game
                 {
                     CoinsController.coinsList[i].DrawSprite(gr);
                 }
+            }
+            foreach (var heart in player.hearts)
+            {
+                heart.Draw(gr);
+            }
+            foreach(var speedboost in player.speedBoosts)
+            {
+                speedboost.Draw(gr);
             }
         }
 
@@ -144,15 +173,15 @@ namespace Game
         {
             if (ObstaclesController.checker == false)
             {
-                timer2.Stop();
+                foreach(var timer in timers)
+                    timer.Stop();
                 ObstaclesController.checker = true;
                 var res = MessageBox.Show("Вы проиграли!!!", "Game over", MessageBoxButtons.OK);
                 if (res == DialogResult.OK)
                 {
-                    //Dispose();
-                    //StartScreen screen = new StartScreen(); (очки будут копиться и деньги тоже)
-                    //screen.ShowDialog(); 
-                    Application.Restart();
+                    Dispose();
+                    StartScreen screen = new StartScreen();
+                    screen.ShowDialog();
                 }
             }
             Invalidate();
@@ -170,6 +199,11 @@ namespace Game
         {
             CoinsController.CreateCoins();
             CoinsController.MoveCoins(player);
+        }
+
+        private void Timer5_Tick(object sender, EventArgs e)
+        {
+            ObstaclesController.CheckContact(player);
         }
     }
 }

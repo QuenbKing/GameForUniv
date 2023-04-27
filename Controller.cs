@@ -1,15 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
+﻿using System.Windows.Forms;
 
 namespace Game
 {
     public static class Controller
     {
-        public static GameModel player;
+        public static Player player;
 
         public static void Move(object sender, KeyEventArgs e)
         {

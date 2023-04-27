@@ -36,25 +36,33 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Hearts.cs" />
     <Compile Include="Coins.cs" />
     <Compile Include="CoinsController.cs" />
     <Compile Include="Controller.cs" />
+    <Compile Include="Directory.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
-    <Compile Include="GameModel.cs" />
+    <Compile Include="Player.cs" />
     <Compile Include="Obstacle.cs" />
     <Compile Include="ObstaclesController.cs" />
-    <Compile Include="Physics.cs" />
     <Compile Include="Programm.cs" />
+    <Compile Include="SpeedBoosts.cs" />
     <Compile Include="StartScreen.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="StartScreen.Designer.cs">
       <DependentUpon>StartScreen.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Store.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Store.Designer.cs">
+      <DependentUpon>Store.cs</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -71,18 +79,25 @@
     <EmbeddedResource Include="StartScreen.resx">
       <DependentUpon>StartScreen.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Store.resx">
+      <DependentUpon>Store.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="ImagesForGame\Heart.png" />
     <Content Include="ImagesForGame\Money.png" />
     <Content Include="ImagesForGame\oblaka2.png" />
     <Content Include="ImagesForGame\scores.png" />
-    <Content Include="ImagesForGame\VinniPuhBig.png" />
+    <Content Include="ImagesForGame\speed.png" />
+    <Content Include="ImagesForGame\VinniPuhSmall 2.png" />
     <Content Include="ImagesForGame\VinniPuhSmall.png" />
     <Content Include="ImagesForGame\vinniUmer.png" />
     <Content Include="Obstacles\1.png" />
     <Content Include="Obstacles\2.png" />
     <Content Include="Obstacles\3.png" />
     <Content Include="StartFormImages\Med.png" />
+    <Content Include="StoreImg\backImg.png" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
