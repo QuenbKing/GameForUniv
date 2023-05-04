@@ -36,6 +36,12 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Game_Pause.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Game_Timers.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Hearts.cs" />
     <Compile Include="Coins.cs" />
     <Compile Include="CoinsController.cs" />
@@ -58,12 +64,6 @@
     <Compile Include="StartScreen.Designer.cs">
       <DependentUpon>StartScreen.cs</DependentUpon>
     </Compile>
-    <Compile Include="Store.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Store.Designer.cs">
-      <DependentUpon>Store.cs</DependentUpon>
-    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -79,11 +79,10 @@
     <EmbeddedResource Include="StartScreen.resx">
       <DependentUpon>StartScreen.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Store.resx">
-      <DependentUpon>Store.cs</DependentUpon>
-    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="GamePause\Pause.png" />
+    <Content Include="GamePause\Pause2.png" />
     <Content Include="ImagesForGame\Heart.png" />
     <Content Include="ImagesForGame\Money.png" />
     <Content Include="ImagesForGame\oblaka2.png" />
@@ -96,7 +95,7 @@
     <Content Include="Obstacles\2.png" />
     <Content Include="Obstacles\3.png" />
     <Content Include="StartFormImages\Med.png" />
-    <Content Include="StoreImg\backImg.png" />
+    <Content Include="StartFormImages\Obuchenie.png" />
     <Content Include="StoreImg\backImg3.png" />
   </ItemGroup>
   <ItemGroup />

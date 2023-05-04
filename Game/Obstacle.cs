@@ -1,4 +1,5 @@
 ﻿using System.Drawing;
+using System.Drawing.Drawing2D;
 
 namespace Game
 {
@@ -26,9 +27,9 @@ namespace Game
                 && y < player.y + player.size.Height
                 && player.y < y + size.Height)
             {
+                player.hearts.RemoveAt(player.hearts.Count - 1);
                 if (player.hearts.Count != 0)
                 {
-                    player.hearts.RemoveAt(player.hearts.Count - 1);
                     ObstaclesController.ReCreateImage(this, 0, 0, new System.Random());
                     return false;
                 }

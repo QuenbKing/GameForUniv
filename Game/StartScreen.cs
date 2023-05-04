@@ -14,6 +14,7 @@ namespace Game
         private static Label HighSroce;
         private static Label Money;
         private static int scores;
+        private static int startFormCount = 1;
         public StartScreen()
         {
             InitializeComponent();
@@ -22,8 +23,10 @@ namespace Game
 
         private void Init()
         {
-            this.Height = 1080;
-            this.Width = 1920;
+            DoubleBuffered = true;
+            Height = 1080;
+            Width = 1920;
+            FormBorderStyle = FormBorderStyle.FixedSingle;
             Controls.Clear();
             Directory.sprites = new System.Collections.Generic.Dictionary<string, Bitmap>();
             Directory.MakeDir("StartFormImages");
@@ -69,17 +72,22 @@ namespace Game
 
             HighSroce = new Label
             {
-                Location = new Point(image.Location.X, exitButton.Bottom + Height / 20),
-                Size = new Size(image.Width, image.Height / 4),
-                BackColor = Color.Transparent
+                Size = new Size(200, image.Height / 4),
+                Location = new Point(Width/2 - Width/48, exitButton.Bottom + Height / 20),
+                BackColor = Color.Transparent,
+                Font = new Font("Times New Roman", 20)
             };
             Controls.Add(HighSroce);
 
             Money = new Label
             {
-                Location = new Point(image.Location.X, HighSroce.Bottom + Height / 20),
-                Size = new Size(image.Width, image.Height / 4),
-                Text = $"Money:{CoinsController.money}",
+                Image = new Bitmap("D:\\GameForUniv\\Game\\ImagesForGame\\Money.png"),
+                Location = new Point(Width/2, HighSroce.Bottom),
+                Size = new Size(160, image.Height / 4),
+                Text = $":{CoinsController.money}",
+                TextAlign = ContentAlignment.MiddleCenter,
+                Font = new Font("Times New Roman", 20),
+                ImageAlign = ContentAlignment.MiddleLeft,
                 BackColor = Color.Transparent
             };
             Controls.Add(Money);
@@ -98,14 +106,16 @@ namespace Game
         {
             image.Location = new Point(Width / 2 - menuImage.Width / 2, 0);
             image.Size = new Size(Width / 5, Height / 3);
-            startButton.Location = new Point(image.Location.X, image.Bottom + Height / 20);
-            startButton.Size = new Size(image.Width, image.Height / 3);
-            exitButton.Location = new Point(image.Location.X, startButton.Bottom + Height / 20);
-            exitButton.Size = new Size(image.Width, image.Height / 3);
-            HighSroce.Location = new Point(image.Location.X, exitButton.Bottom + Height / 20);
-            HighSroce.Size = new Size(image.Width, image.Height / 3);
-            Money.Location = new Point(image.Location.X, HighSroce.Bottom + Height / 20);
-            Money.Size = new Size(image.Width, image.Height / 3);
+            startButton.Location = new Point(image.Location.X, image.Bottom + Height / 30);
+            startButton.Size = new Size(image.Width, image.Height / 4);
+            storeButton.Location = new Point(image.Location.X, startButton.Bottom + Height / 20);
+            storeButton.Size = new Size(image.Width, image.Height / 4);
+            exitButton.Location = new Point(image.Location.X, storeButton.Bottom + Height / 20);
+            exitButton.Size = new Size(image.Width, image.Height / 4);
+            HighSroce.Location = new Point(Width / 2 - Width / 48, exitButton.Bottom + Height / 20);
+            HighSroce.Size = new Size(160, image.Height / 4);
+            Money.Location = new Point(Width / 2, HighSroce.Bottom);
+            Money.Size = new Size(130, image.Height / 4);
         }
 
         private void CheckHigscore()
@@ -118,15 +128,38 @@ namespace Game
 
         private void LoadGame(object sender, EventArgs e)
         {
+            Controls.Clear();
+            if(startFormCount == 1)
+            {
+                startFormCount++;
+                BackgroundImage = new Bitmap("D:\\GameForUniv\\Game\\StartFormImages\\Obuchenie.png");
+                var ok = new Button
+                {
+                    Location = new Point(Width / 2, Height * 5 / 6),
+                    Size = new Size(150, 40),
+                    Text = "OK",
+                    BackColor = Color.White
+                };
+                Controls.Add(ok);
+                ok.Click += (s, ev) =>
+                {
+                    StartPlay();
+                };
+            }
+            else
+                StartPlay();
+        }
+
+        private void StartPlay()
+        {
             Hide();
-            if(ObstaclesController.score > scores)
+            if (ObstaclesController.score > scores)
             {
                 scores = ObstaclesController.score;
             }
             Form1 game = new Form1();
-            game.Activate();
             game.ShowDialog();
-            Close();
+            Dispose();
         }
 
         private void CloseGame(object sender, EventArgs e)

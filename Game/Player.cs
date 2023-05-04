@@ -57,7 +57,7 @@ namespace Game
                 heart.size = new Size(51, 50);
                 if (i == 0)
                 {
-                    heart.location = new Point(Screen.PrimaryScreen.Bounds.Width - heart.size.Width - heart.size.Height, 0);
+                    heart.location = new Point(Form.ActiveForm.ClientSize.Width - heart.size.Width, 0);
                     oldHeart = heart;
                 }
                 else
@@ -77,13 +77,13 @@ namespace Game
                 speedBoost.size = new Size(70, 40);
                 if(i == 0)
                 {
-                    speedBoost.location = new Point(0, Screen.PrimaryScreen.Bounds.Height - speedBoost.size.Width - speedBoost.size.Height);
+                    speedBoost.location = new Point(0, Form.ActiveForm.ClientSize.Height - speedBoost.size.Height);
                     oldSpeedBoost = speedBoost;
                 }
                 else
                 {
                     speedBoost.location = new Point(oldSpeedBoost.location.X + speedBoost.size.Width + speedBoost.size.Height, 
-                        Screen.PrimaryScreen.Bounds.Height - speedBoost.size.Width - speedBoost.size.Height);
+                        Form.ActiveForm.ClientSize.Height - speedBoost.size.Width - speedBoost.size.Height);
                     oldSpeedBoost = speedBoost;
                 }
                 speedBoosts.Add(speedBoost);

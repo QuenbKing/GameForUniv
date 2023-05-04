@@ -1,12 +1,12 @@
 ﻿using System.Windows.Forms;
+using System.Drawing;
 
 namespace Game
 {
     public static class Controller
     {
         public static Player player;
-
-        public static void Move(string KeyWS, string KeyAD, string KeyF)
+        public static void Move(string KeyWS, string KeyAD)
         {
             switch (KeyWS)
             {
@@ -17,7 +17,7 @@ namespace Game
                     }
                     break;
                 case "S":
-                    if (player.y + player.size.Height < Form.ActiveForm.ClientSize.Height - player.size.Height * 0.5)
+                    if (player.y + player.size.Height < Form.ActiveForm.ClientSize.Height - player.size.Height * 0.3)
                     {
                         player.MoveDown();
                     }
@@ -26,7 +26,7 @@ namespace Game
             switch (KeyAD)
             {
                 case "D":
-                    if(player.x + player.size.Width < Form.ActiveForm.ClientSize.Width - player.size.Width * 0.5)
+                    if(player.x + player.size.Width < Form.ActiveForm.ClientSize.Width - player.size.Width * 0.3)
                     {
                         player.MoveRight();
                         player.currFrame = 1;
@@ -40,32 +40,37 @@ namespace Game
                     }
                     break;
             }
-            if (KeyF == "F")
-                ActivateSpeedBoost();
         }
 
-        public static void ActivateSpeedBoost()
-        {
-            if (player.speedBoosts.Count != 0)
-            {
-                player.speedBoosts.RemoveAt(player.speedBoosts.Count - 1);
-                player.speed += 10;
-                var tickCount = 0;
-                Timer tm = new Timer
-                {
-                    Interval = 500
-                };
-                tm.Tick += (s, ev) =>
-                {
-                    tickCount++;
-                    if (tickCount == 15)
-                    {
-                        player.speed = 10;
-                        tm.Stop();
-                    }
-                };
-                tm.Start();
-            }
-        }
+        //public static void ActivateSpeedBoost()
+        //{
+        //    if (player.speedBoosts.Count != 0)
+        //    {
+        //        player.speedBoosts.RemoveAt(player.speedBoosts.Count - 1);
+        //        player.speed += 10;
+        //        progressBar.Visible = true;
+        //        var tickCount = 0;
+        //        var timer = new Timer
+        //        {
+        //            Interval = 1
+        //        };
+        //        timer.Tick += (s, ev) =>
+        //        {
+        //            if (tickCount == 750 || ObstaclesController.checker == false)
+        //            {
+        //                progressBar.Value = 0;
+        //                progressBar.Visible = false;
+        //                player.speed = 10;
+        //                timer.Stop();
+        //            }
+        //            else
+        //            {
+        //                progressBar.Value++;
+        //                tickCount++;
+        //            }
+        //        };
+        //        timer.Start();
+        //    }
+        //}
     }
 }
