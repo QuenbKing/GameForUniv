@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement.TrayNotify;
 
 namespace Game
 {
@@ -30,14 +29,14 @@ namespace Game
             MaximumSize = Screen.PrimaryScreen.Bounds.Size;
             FormBorderStyle = FormBorderStyle.FixedSingle;
             Directory.sprites = new Dictionary<string, Bitmap>();
-            Directory.MakeDir("ImagesForGame");
+            Directory.MakeDir();
             ObstaclesController.obstacles = new List<Obstacle>();
             CoinsController.coinsList = new List<Coins>();
             ObstaclesController.limScore = 30;
             ObstaclesController.CreateObstacle();
             CoinsController.CreateCoins();
             ObstaclesController.score = 0;
-            playerImg = new Bitmap("D:\\GameForUniv\\Game\\ImagesForGame\\VinniPuhSmall_2-transformed.png");
+            playerImg = Directory.sprites["VinniPuhSmall_2-transformed.png"];
             player = new Player(new Size(playerImg.Width / 2, playerImg.Height), Width / 2 - playerImg.Width / 2, Height / 2, playerImg);
             background = Directory.sprites["oblaka2.png"];
             StartDraw = 0;

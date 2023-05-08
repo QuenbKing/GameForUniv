@@ -23,7 +23,7 @@ namespace Game
 
         private void MakePause()
         {
-            var menuImg = new Bitmap("D:\\GameForUniv\\Game\\GamePause\\Pause2.png");
+            var menuImg = Directory.sprites["Pause2.png"];
             MakeMenu(ref PauseBox, menuImg);
             MakeContinueButton(PauseBox);
             MakeExitToMenuButton(PauseBox, Continue);

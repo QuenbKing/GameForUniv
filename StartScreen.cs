@@ -8,7 +8,6 @@ namespace Game
     {
         private static PictureBox image;
         private static Image menuImage;
-        private static int scores;
         private static int startFormCount = 1;
         public StartScreen()
         {
@@ -19,12 +18,12 @@ namespace Game
         private void Init()
         {
             DoubleBuffered = true;
-            Height = 1080;
-            Width = 1920;
+            MaximumSize = Screen.PrimaryScreen.Bounds.Size;
+            MinimumSize = Screen.PrimaryScreen.Bounds.Size;
             FormBorderStyle = FormBorderStyle.FixedSingle;
             Controls.Clear();
             Directory.sprites = new System.Collections.Generic.Dictionary<string, Bitmap>();
-            Directory.MakeDir("StartFormImages");
+            Directory.MakeDir();
             BackgroundImage = null;
             BackColor = Color.LightSkyBlue;
             menuImage = Directory.sprites["Med.png"];
@@ -68,7 +67,7 @@ namespace Game
             if(startFormCount == 1)
             {
                 startFormCount++;
-                BackgroundImage = new Bitmap("D:\\GameForUniv\\Game\\StartFormImages\\Obuchenie.png");
+                BackgroundImage = Directory.sprites["Obuchenie.png"];
                 var ok = new Button
                 {
                     Location = new Point(Width / 2, Height * 5 / 6),

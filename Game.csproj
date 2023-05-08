@@ -96,6 +96,22 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="GameImages\1.png" />
+    <Content Include="GameImages\2.png" />
+    <Content Include="GameImages\3.png" />
+    <Content Include="GameImages\backImg3.png" />
+    <Content Include="GameImages\GameOver.png" />
+    <Content Include="GameImages\Heart.png" />
+    <Content Include="GameImages\Med.png" />
+    <Content Include="GameImages\Money.png" />
+    <Content Include="GameImages\oblaka2.png" />
+    <Content Include="GameImages\Obuchenie.png" />
+    <Content Include="GameImages\Pause2.png" />
+    <Content Include="GameImages\scores.png" />
+    <Content Include="GameImages\speed.png" />
+    <Content Include="GameImages\VinniPuhSmall 2.png" />
+    <Content Include="GameImages\VinniPuhSmall_2-transformed.png" />
+    <Content Include="GameImages\vinniUmer.png" />
     <Content Include="GameOver\GameOver.png" />
     <Content Include="GamePause\Pause.png" />
     <Content Include="GamePause\Pause2.png" />

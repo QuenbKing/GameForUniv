@@ -15,7 +15,7 @@ namespace Game
 
         public SpeedBoosts()
         {
-            sprite = new Bitmap("D:\\GameForUniv\\Game\\ImagesForGame\\speed.png");
+            sprite = Directory.sprites["speed.png"];
         }
 
         public void Draw(Graphics gr)

@@ -88,9 +88,7 @@ namespace Game
         {
             ObstaclesController.MoveObstacles(player);
             if (ObstaclesController.checker == false)
-            {
                 GameOver();
-            }
         }
 
         private void ObstaclesSpeedAndScoreTimer_Tick(object sender, EventArgs e)

@@ -9,7 +9,7 @@ namespace Game
         private void OpenStore(object sender, EventArgs e)
         {
             Controls.Clear();
-            BackgroundImage = new Bitmap("D:\\GameForUniv\\Game\\StoreImg\\backImg3.png");
+            BackgroundImage = Directory.sprites["backImg3.png"];
             InitStoreButtons();
         }
 

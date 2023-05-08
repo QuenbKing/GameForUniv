@@ -22,7 +22,7 @@ namespace Game
 
             Money = new Label
             {
-                Image = new Bitmap("D:\\GameForUniv\\Game\\ImagesForGame\\Money.png"),
+                Image = Directory.sprites["Money.png"],
                 Location = new Point(Width / 2, HighSroce.Bottom),
                 Size = new Size(160, image.Height / 4),
                 Text = $":{CoinsController.money}",

@@ -19,7 +19,7 @@ namespace Game
             foreach (var obstacle in obstacles)
             {
                 obstacle.y += obstacle.speed;
-                CreateRegion(obstacle, new Random(), obstacle.fileName);
+                CreateRegion(obstacle, obstacle.fileName);
                 if (obstacle.y >= Screen.PrimaryScreen.Bounds.Height)
                 {
                     ReCreateImage(obstacle, 0, 0, new Random());
@@ -55,7 +55,6 @@ namespace Game
         {
             Size newSize;
             Point newPoint;
-            string path = @"D:\GameForUniv\Game\Obstacles\";
             obs.fileName = rnd.Next(1, 4).ToString();
             switch (obs.fileName)
             {
@@ -72,7 +71,7 @@ namespace Game
                     height = width;
                     break;
             }
-            obs.obstacleImage = new Bitmap(path + obs.fileName + ".png");
+            obs.obstacleImage = Directory.sprites[$"{obs.fileName}" + ".png"];
             do
             {
                 newSize = new Size(width, height);
@@ -81,10 +80,10 @@ namespace Game
             obs.size = newSize;
             obs.x = newPoint.X; obs.y = newPoint.Y;
 
-            CreateRegion(obs, rnd, obs.fileName);
+            CreateRegion(obs, obs.fileName);
         }
 
-        private static void CreateRegion(Obstacle obs, Random rnd, string fileName)
+        private static void CreateRegion(Obstacle obs, string fileName)
         {
             obs.path = new GraphicsPath();
             switch (fileName)
