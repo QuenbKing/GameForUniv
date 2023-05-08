@@ -25,8 +25,7 @@ namespace Game
 
         public void Init()
         {
-            MinimumSize = Screen.PrimaryScreen.Bounds.Size;
-            MaximumSize = Screen.PrimaryScreen.Bounds.Size;
+            WindowState = FormWindowState.Maximized;
             FormBorderStyle = FormBorderStyle.FixedSingle;
             Directory.sprites = new Dictionary<string, Bitmap>();
             Directory.MakeDir();

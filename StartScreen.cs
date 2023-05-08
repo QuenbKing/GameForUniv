@@ -18,8 +18,7 @@ namespace Game
         private void Init()
         {
             DoubleBuffered = true;
-            MaximumSize = Screen.PrimaryScreen.Bounds.Size;
-            MinimumSize = Screen.PrimaryScreen.Bounds.Size;
+            WindowState = FormWindowState.Maximized;
             FormBorderStyle = FormBorderStyle.FixedSingle;
             Controls.Clear();
             Directory.sprites = new System.Collections.Generic.Dictionary<string, Bitmap>();
@@ -67,10 +66,10 @@ namespace Game
             if(startFormCount == 1)
             {
                 startFormCount++;
-                BackgroundImage = Directory.sprites["Obuchenie.png"];
+                BackgroundImage = ResizeImage(Directory.sprites["Obuchenie.png"], Size);
                 var ok = new Button
                 {
-                    Location = new Point(Width / 2, Height * 5 / 6),
+                    Location = new Point(Width / 2, Height * 6/7),
                     Size = new Size(150, 40),
                     Text = "OK",
                     BackColor = Color.White
@@ -84,6 +83,8 @@ namespace Game
             else
                 StartPlay();
         }
+
+        private Bitmap ResizeImage(Image oldImage, Size size) => new Bitmap(oldImage, size);
 
         private void StartPlay()
         {

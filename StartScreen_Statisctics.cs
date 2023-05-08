@@ -13,11 +13,11 @@ namespace Game
             HighSroce = new Label
             {
                 Size = new Size(200, image.Height / 4),
-                Location = new Point(Width / 2 - Width / 48, exitButton.Bottom + Height / 20),
                 Text = $"HighScore:{ObstaclesController.maxScore}",
                 BackColor = Color.Transparent,
                 Font = new Font("Times New Roman", 20)
             };
+            HighSroce.Location = new Point(exitButton.Location.X + exitButton.Width / 2 - HighSroce.Width/2, exitButton.Bottom + HighSroce.Height);
             Controls.Add(HighSroce);
 
             Money = new Label
