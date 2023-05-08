@@ -13,8 +13,6 @@ namespace Game
 
         public static void CreateCoins()
         {
-            if (ObstaclesController.score == ObstaclesController.limScore)
-                coinsCount++;
             if (coinsList.Count < coinsCount)
             {
                 var coin = new Coins();
@@ -35,7 +33,7 @@ namespace Game
             {
                 for (int i = 0; i < coinsCount; i++)
                 {
-                    if (coinsList[i].CheckContactPlayerWithCoin(player))
+                    if (coinsList[i].CheckContactPlayerWithCoin(player) && coinsList[i].location.Y < Screen.PrimaryScreen.Bounds.Height)
                     {
                         money += 10;
                         coinsList.RemoveAt(i);

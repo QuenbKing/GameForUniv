@@ -33,14 +33,7 @@ namespace Game
                 || region.IsVisible(new Point(player.x, player.y + player.size.Height))
                 || region.IsVisible(new Point(player.x + player.size.Width / 2, player.y)))
             {
-                player.hearts.RemoveAt(player.hearts.Count - 1);
-                if (player.hearts.Count != 0)
-                {
-                    ObstaclesController.ReCreateImage(this, 0, 0, new System.Random());
-                    return false;
-                }
-                else
-                    return true;
+                return AliveOrDead(player);
             }
             return false;
             //if (x < player.x + player.size.Width
@@ -63,6 +56,23 @@ namespace Game
             //    || region.IsVisible(new Point(player.x + player.size.Width / 2, player.y + player.size.Height))
             //    || region.IsVisible(new Point(player.x, player.y + player.size.Height / 2))
             //    || region.IsVisible(new Point(player.x + player.size.Width, player.y + player.size.Height / 2))
+        }
+
+        private bool AliveOrDead(Player player)
+        {
+            if (player.hearts.Count > 1)
+            {
+                player.hearts.RemoveAt(player.hearts.Count - 1);
+                ObstaclesController.ReCreateImage(this, 0, 0, new System.Random());
+                return false;
+            }
+            else if (player.hearts.Count == 1)
+            {
+                player.hearts.RemoveAt(player.hearts.Count - 1);
+                return true;
+            }
+            else
+                return true;
         }
     }
 }
