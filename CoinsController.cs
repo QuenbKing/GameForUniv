@@ -15,7 +15,7 @@ namespace Game
         {
             if (ObstaclesController.score == ObstaclesController.limScore)
                 coinsCount++;
-            if(coinsList.Count < coinsCount)
+            if (coinsList.Count < coinsCount)
             {
                 var coin = new Coins();
                 CreatePosition(coin);
@@ -31,7 +31,7 @@ namespace Game
 
         public static void MoveCoins(Player player)
         {
-            if(coinsList.Count > 0)
+            if (coinsList.Count > 0)
             {
                 for (int i = 0; i < coinsCount; i++)
                 {

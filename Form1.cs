@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.TrayNotify;
 
 namespace Game
 {
@@ -9,12 +10,12 @@ namespace Game
     {
         private static Image playerImg;
         private static Image background;
-        public Player player;
-        private static bool isPress;
-        private static KeyEventArgs Key;
+        private Player player;
+        private static KeyEventArgs KeyAD;
+        private static KeyEventArgs KeyWS;
         private static int _startDraw;
         private static Label scores;
-        private static List<Timer> timers;
+        private static ProgressBar SpeedBoostProgress;
         public Form1()
         {
             DoubleBuffered = true;
@@ -25,27 +26,23 @@ namespace Game
 
         public void Init()
         {
+            MinimumSize = Screen.PrimaryScreen.Bounds.Size;
+            MaximumSize = Screen.PrimaryScreen.Bounds.Size;
+            FormBorderStyle = FormBorderStyle.FixedSingle;
             Directory.sprites = new Dictionary<string, Bitmap>();
             Directory.MakeDir("ImagesForGame");
             ObstaclesController.obstacles = new List<Obstacle>();
             CoinsController.coinsList = new List<Coins>();
+            ObstaclesController.limScore = 30;
             ObstaclesController.CreateObstacle();
             CoinsController.CreateCoins();
             ObstaclesController.score = 0;
-            isPress = false;
-            timers = new List<Timer>();
-            this.Height = 1080;
-            this.Width = 1920;
-            playerImg = Directory.sprites["VinniPuhSmall 2.png"];
+            playerImg = new Bitmap("D:\\GameForUniv\\Game\\ImagesForGame\\VinniPuhSmall_2-transformed.png");
             player = new Player(new Size(playerImg.Width / 2, playerImg.Height), Width / 2 - playerImg.Width / 2, Height / 2, playerImg);
-            player.CreateHearts(Player.heartsCount);
-            player.CreateBoosts(Player.speedBoostCount);
-            Resize += new EventHandler(MForm_Resize);
             background = Directory.sprites["oblaka2.png"];
             StartDraw = 0;
             Paint += new PaintEventHandler(OnPaint);
-            KeyDown += new KeyEventHandler(StartMove);
-            KeyUp += new KeyEventHandler(StopMove);
+            Keyboard();
 
             scores = new Label
             {
@@ -60,46 +57,18 @@ namespace Game
             };
             Controls.Add(scores);
 
-            var timer1 = new Timer
+            SpeedBoostProgress = new ProgressBar
             {
-                Interval = 15
+                Location = new Point(0, scores.Bottom + scores.Height),
+                Size = new Size(200, 20),
+                Style = ProgressBarStyle.Blocks,
+                Visible = false,
+                Value = 0,
+                Maximum = 750
             };
-            timer1.Tick += Timer1_Tick;
-            timer1.Start();
-            timers.Add(timer1);
+            Controls.Add(SpeedBoostProgress);
 
-            var timer2 = new Timer
-            {
-                Interval = 10
-            };
-            timer2.Tick += Timer2_Tick;
-            timer2.Start();
-            timers.Add(timer2);
-
-            var timer3 = new Timer
-            {
-                Interval = 1000
-            };
-            timer3.Tick += Timer3_Tick;
-            timer3.Start();
-            timers.Add(timer3);
-
-            var timer4 = new Timer
-            {
-                Interval = 10
-            };
-            timer4.Tick += Timer4_Tick;
-            timer4.Start();
-            timers.Add(timer4);
-
-            
-            var timer5 = new Timer
-            {
-                Interval = 10
-            };
-            timer5.Tick += Timer5_Tick;
-            timer5.Start();
-            timers.Add(timer5);
+            IntializeTimers();
         }
 
         int StartDraw
@@ -112,12 +81,6 @@ namespace Game
             }
         }
 
-        private void MForm_Resize(object sender, EventArgs e)
-        {
-            player.x = Width / 2 - playerImg.Width / 2;
-            player.y = Height / 2;
-        }
-
         private void OnPaint(object sender, PaintEventArgs e)
         {
             var gr = e.Graphics;
@@ -125,7 +88,7 @@ namespace Game
             {
                 gr.DrawImage(background, 0, StartDraw + background.Height * i);
             }
-            gr.DrawImage(player.playerImage, player.x, player.y, new Rectangle(new Point(89 * player.currFrame), player.size), GraphicsUnit.Pixel);
+            gr.DrawImage(player.playerImage, player.x, player.y, new Rectangle(new Point(80 * player.currFrame), player.size), GraphicsUnit.Pixel);
             foreach(var obs in ObstaclesController.obstacles)
             {
                 obs.DrawSprite(gr);
@@ -147,63 +110,40 @@ namespace Game
             }
         }
 
-        private void StopMove(object sender, KeyEventArgs e)
+        private void Keyboard()
         {
-            if (Key.KeyCode == e.KeyCode)
-                isPress = false;
-        }
-
-        private void StartMove(object sender, KeyEventArgs e)
-        {
-            isPress = true;
-            Key = e;
-        }
-
-        private void Timer1_Tick(object sender, EventArgs e)
-        {
-            StartDraw += 3;
-            if (isPress)
+            KeyAD = new KeyEventArgs(Keys.Z);
+            KeyWS = new KeyEventArgs(Keys.Z);
+            KeyDown += (s, e) =>
             {
-                Controller.player = player;
-                Controller.Move(sender, Key);
-            }
-        }
-
-        private void Timer2_Tick(object sender, EventArgs e)
-        {
-            if (ObstaclesController.checker == false)
+                if (e.KeyData.ToString() == "W" || e.KeyData.ToString() == "S")
+                    KeyWS = e;
+                else if (e.KeyData.ToString() == "A" || e.KeyData.ToString() == "D")
+                    KeyAD = e;
+                if (e.KeyData.ToString() == "F")
+                    ActivateSpeedBoost();
+            };
+            KeyUp += (s, e) =>
             {
-                foreach(var timer in timers)
-                    timer.Stop();
-                ObstaclesController.checker = true;
-                var res = MessageBox.Show("Вы проиграли!!!", "Game over", MessageBoxButtons.OK);
-                if (res == DialogResult.OK)
-                {
-                    Dispose();
-                    StartScreen screen = new StartScreen();
-                    screen.ShowDialog();
-                }
+                if ((e.KeyData.ToString() == "W" && KeyWS.KeyData.ToString() != "S") || (e.KeyData.ToString() == "S" && KeyWS.KeyData.ToString() != "W"))
+                    KeyWS = new KeyEventArgs(Keys.Z);
+                else if ((e.KeyData.ToString() == "A" && KeyAD.KeyData.ToString() != "D") || (e.KeyData.ToString() == "D" && KeyAD.KeyData.ToString() != "A"))
+                    KeyAD = new KeyEventArgs(Keys.Z);
+                if (e.KeyData.ToString() == "Escape" && !PauseActive)
+                    GoToPause();
+            };
+        }
+
+        private void ActivateSpeedBoost()
+        {
+            if (player.speedBoosts.Count != 0)
+            {
+                player.speedBoosts.RemoveAt(player.speedBoosts.Count - 1);
+                player.speed += 10;
+                SpeedBoostProgress.Visible = true;
+                timers.Add(SpeedBoostTimer);
+                SpeedBoostTimer.Start();
             }
-            Invalidate();
-            ObstaclesController.MoveObstacles(player);
-        }
-
-        private void Timer3_Tick(object sender, EventArgs e)
-        {
-            ObstaclesController.score += 2;
-            scores.Text = $"{ObstaclesController.score}";
-            ObstaclesController.SpeedUp();
-        }
-
-        private void Timer4_Tick(object sender, EventArgs e)
-        {
-            CoinsController.CreateCoins();
-            CoinsController.MoveCoins(player);
-        }
-
-        private void Timer5_Tick(object sender, EventArgs e)
-        {
-            ObstaclesController.CheckContact(player);
         }
     }
 }
