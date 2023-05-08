@@ -5,25 +5,26 @@ namespace Game
 {
     public partial class StartScreen : Form
     {
-        private static Label HighSroce;
+        private static Label HighScore;
         private static Label Money;
 
         private void InitStatistics()
         {
-            HighSroce = new Label
+            HighScore = new Label
             {
+                Location = new Point(image.Location.X, exitButton.Bottom + Height / 20),
                 Size = new Size(200, image.Height / 4),
                 Text = $"HighScore:{ObstaclesController.maxScore}",
+                TextAlign = ContentAlignment.MiddleLeft,
                 BackColor = Color.Transparent,
                 Font = new Font("Times New Roman", 20)
             };
-            HighSroce.Location = new Point(exitButton.Location.X + exitButton.Width / 2 - HighSroce.Width/2, exitButton.Bottom + HighSroce.Height);
-            Controls.Add(HighSroce);
+            Controls.Add(HighScore);
 
             Money = new Label
             {
                 Image = Directory.sprites["Money.png"],
-                Location = new Point(Width / 2, HighSroce.Bottom),
+                Location = new Point(image.Location.X, HighScore.Bottom),
                 Size = new Size(160, image.Height / 4),
                 Text = $":{CoinsController.money}",
                 TextAlign = ContentAlignment.MiddleCenter,

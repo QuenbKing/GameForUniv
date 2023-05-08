@@ -54,9 +54,10 @@ namespace Game
             storeButton.Size = new Size(image.Width, image.Height / 4);
             exitButton.Location = new Point(image.Location.X, storeButton.Bottom + Height / 20);
             exitButton.Size = new Size(image.Width, image.Height / 4);
-            HighSroce.Location = new Point(Width / 2 - Width / 48, exitButton.Bottom + Height / 20);
-            HighSroce.Size = new Size(160, image.Height / 4);
-            Money.Location = new Point(Width / 2, HighSroce.Bottom);
+            HighScore.Size = Size = new Size(200, image.Height / 4);
+            HighScore.Location = new Point(image.Location.X, exitButton.Bottom + Height / 20);
+            HighScore.Size = Size = new Size(200, image.Height / 4);
+            Money.Location = new Point(image.Location.X, HighScore.Bottom);
             Money.Size = new Size(130, image.Height / 4);
         }
 
@@ -66,7 +67,7 @@ namespace Game
             if(startFormCount == 1)
             {
                 startFormCount++;
-                BackgroundImage = ResizeImage(Directory.sprites["Obuchenie.png"], Size);
+                BackgroundImage = Directory.sprites["Obuchenie.png"];
                 var ok = new Button
                 {
                     Location = new Point(Width / 2, Height * 6/7),
@@ -83,8 +84,6 @@ namespace Game
             else
                 StartPlay();
         }
-
-        private Bitmap ResizeImage(Image oldImage, Size size) => new Bitmap(oldImage, size);
 
         private void StartPlay()
         {
