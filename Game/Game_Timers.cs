@@ -13,10 +13,14 @@ namespace Game
         private Timer CheckContactTimer;
         private Timer CreateBoosts;
         private Timer SpeedBoostTimer;
+        private static List<Timer> timers;
+
         private int SpeedBoostTimerTickCount;
 
         private void IntializeTimers()
         {
+            timers = new List<Timer>();
+
             SpeedBoostTimerTickCount = 0;
 
             MoveTimer = new Timer
@@ -49,7 +53,7 @@ namespace Game
 
             CheckContactTimer = new Timer
             {
-                Interval = 30
+                Interval = 10
             };
             CheckContactTimer.Tick += CheckContactTimer_Tick;
             timers.Add(CheckContactTimer);
@@ -83,11 +87,8 @@ namespace Game
         private void ObstaclesMoveTimer_Tick(object sender, EventArgs e)
         {
             ObstaclesController.MoveObstacles(player);
-            Invalidate();
             if (ObstaclesController.checker == false)
-            {
                 GameOver();
-            }
         }
 
         private void ObstaclesSpeedAndScoreTimer_Tick(object sender, EventArgs e)
@@ -99,6 +100,7 @@ namespace Game
 
         private void CoinsTimer_Tick(object sender, EventArgs e)
         {
+            Invalidate();
             CoinsController.CreateCoins();
             CoinsController.MoveCoins(player);
         }

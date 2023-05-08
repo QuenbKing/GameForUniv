@@ -16,8 +16,6 @@ namespace Game
 
         public Coins()
         {
-            Directory.sprites = new Dictionary<string, Bitmap>();
-            Directory.MakeDir("ImagesForGame");
             size = new Size(100, 75);
             sprite = Directory.sprites["Money.png"];
             speed = 14;

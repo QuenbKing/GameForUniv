@@ -12,10 +12,11 @@ namespace Game
     {
         public static Dictionary<string, Bitmap> sprites;
 
-        public static void MakeDir(string filename, DirectoryInfo imagesDirectory = null)
+        public static void MakeDir(DirectoryInfo imagesDirectory = null)
         {
+            var way = @"..\..\GameImages\";
             if (imagesDirectory == null)
-                imagesDirectory = new DirectoryInfo(filename);
+                imagesDirectory = new DirectoryInfo(way);
             foreach (var e in imagesDirectory.GetFiles("*.png"))
                 sprites[e.Name] = (Bitmap)Image.FromFile(e.FullName);
         }

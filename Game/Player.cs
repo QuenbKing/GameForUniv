@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Drawing;
+using System.Drawing.Drawing2D;
 using System.Windows.Forms;
 
 namespace Game
@@ -15,6 +16,8 @@ namespace Game
         public List<Hearts> hearts;
         public static int speedBoostCount = 1;
         public List<SpeedBoosts> speedBoosts;
+        //public GraphicsPath path;
+        //public Region region;
 
         public Player() { }
         public Player(Size currSize, int x, int y, Image playerImage)
@@ -28,24 +31,38 @@ namespace Game
             speed = 10;
         }
 
+        //private void CreateRegion()
+        //{
+        //    path.AddPolygon(new Point[] { new Point(x, y), new Point(x, y + size.Height), new Point(x + size.Width, y + size.Height), new Point(x + size.Width, y) });
+        //    region = new Region(path);
+        //}
+
         public void MoveLeft()
         {
             x -= speed;
+            //path = new GraphicsPath();
+            //CreateRegion();
         }
 
         public void MoveRight()
         {
             x+= speed;
+            //path = new GraphicsPath();
+            //CreateRegion();
         }
 
         public void MoveUp()
         {
             y-= speed;
+            //path = new GraphicsPath();
+            //CreateRegion();
         }
 
         public void MoveDown()
         {
             y+= speed;
+            //path = new GraphicsPath();
+            //CreateRegion();
         }
 
         public void CreateHearts(int countHearts)
@@ -82,8 +99,8 @@ namespace Game
                 }
                 else
                 {
-                    speedBoost.location = new Point(oldSpeedBoost.location.X + speedBoost.size.Width + speedBoost.size.Height, 
-                        Form.ActiveForm.ClientSize.Height - speedBoost.size.Width - speedBoost.size.Height);
+                    speedBoost.location = new Point(oldSpeedBoost.location.X + oldSpeedBoost.size.Width + speedBoost.size.Height, 
+                        Form.ActiveForm.ClientSize.Height - speedBoost.size.Height);
                     oldSpeedBoost = speedBoost;
                 }
                 speedBoosts.Add(speedBoost);

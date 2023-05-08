@@ -15,7 +15,6 @@ namespace Game
         private static int _startDraw;
         private static Label scores;
         private static ProgressBar SpeedBoostProgress;
-        private static List<Timer> timers;
         public Form1()
         {
             DoubleBuffered = true;
@@ -26,18 +25,18 @@ namespace Game
 
         public void Init()
         {
-            timers = new List<Timer>();
             MinimumSize = Screen.PrimaryScreen.Bounds.Size;
             MaximumSize = Screen.PrimaryScreen.Bounds.Size;
             FormBorderStyle = FormBorderStyle.FixedSingle;
             Directory.sprites = new Dictionary<string, Bitmap>();
-            Directory.MakeDir("ImagesForGame");
+            Directory.MakeDir();
             ObstaclesController.obstacles = new List<Obstacle>();
             CoinsController.coinsList = new List<Coins>();
+            ObstaclesController.limScore = 30;
             ObstaclesController.CreateObstacle();
             CoinsController.CreateCoins();
             ObstaclesController.score = 0;
-            playerImg = Directory.sprites["VinniPuhSmall 2.png"];
+            playerImg = Directory.sprites["VinniPuhSmall_2-transformed.png"];
             player = new Player(new Size(playerImg.Width / 2, playerImg.Height), Width / 2 - playerImg.Width / 2, Height / 2, playerImg);
             background = Directory.sprites["oblaka2.png"];
             StartDraw = 0;
@@ -88,7 +87,7 @@ namespace Game
             {
                 gr.DrawImage(background, 0, StartDraw + background.Height * i);
             }
-            gr.DrawImage(player.playerImage, player.x, player.y, new Rectangle(new Point(89 * player.currFrame), player.size), GraphicsUnit.Pixel);
+            gr.DrawImage(player.playerImage, player.x, player.y, new Rectangle(new Point(80 * player.currFrame), player.size), GraphicsUnit.Pixel);
             foreach(var obs in ObstaclesController.obstacles)
             {
                 obs.DrawSprite(gr);
@@ -129,7 +128,7 @@ namespace Game
                     KeyWS = new KeyEventArgs(Keys.Z);
                 else if ((e.KeyData.ToString() == "A" && KeyAD.KeyData.ToString() != "D") || (e.KeyData.ToString() == "D" && KeyAD.KeyData.ToString() != "A"))
                     KeyAD = new KeyEventArgs(Keys.Z);
-                if (e.KeyData.ToString() == "Escape")
+                if (e.KeyData.ToString() == "Escape" && !PauseActive)
                     GoToPause();
             };
         }
@@ -143,20 +142,6 @@ namespace Game
                 SpeedBoostProgress.Visible = true;
                 timers.Add(SpeedBoostTimer);
                 SpeedBoostTimer.Start();
-            }
-        }
-
-        private void GameOver()
-        {
-            StopTimers();
-            ObstaclesController.checker = true;
-            var res = MessageBox.Show("Вы проиграли!!!", "Game over", MessageBoxButtons.OK);
-            if (res == DialogResult.OK)
-            {
-                Controls.Clear();
-                Dispose();
-                StartScreen screen = new StartScreen();
-                screen.ShowDialog();
             }
         }
     }

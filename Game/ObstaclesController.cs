@@ -12,12 +12,14 @@ namespace Game
         public static List<Obstacle> obstacles;
         public static bool checker = true;
         public static int score;
-        public static int limScore = 30;
+        public static int limScore;
+        public static int maxScore;
         public static void MoveObstacles(Player player)
         {
             foreach (var obstacle in obstacles)
             {
                 obstacle.y += obstacle.speed;
+                CreateRegion(obstacle, obstacle.fileName);
                 if (obstacle.y >= Screen.PrimaryScreen.Bounds.Height)
                 {
                     ReCreateImage(obstacle, 0, 0, new Random());
@@ -53,9 +55,8 @@ namespace Game
         {
             Size newSize;
             Point newPoint;
-            string path = @"D:\GameForUniv\Game\Obstacles\";
-            string fileName = rnd.Next(1, 4).ToString();
-            switch (fileName)
+            obs.fileName = rnd.Next(1, 4).ToString();
+            switch (obs.fileName)
             {
                 case "1":
                     width = rnd.Next(102, 205);
@@ -70,14 +71,36 @@ namespace Game
                     height = width;
                     break;
             }
-            obs.obstacleImage = new Bitmap(path + fileName + ".png");
+            obs.obstacleImage = Directory.sprites[$"{obs.fileName}" + ".png"];
             do
             {
                 newSize = new Size(width, height);
                 newPoint = new Point(rnd.Next(0, Screen.PrimaryScreen.Bounds.Width - width), -rnd.Next(200, 650));
-            }while(obstacles.Any(obstacle => newPoint.X + newSize.Width >= obstacle.x && newPoint.X <= obstacle.x + obstacle.size.Width));
+            } while (obstacles.Any(obstacle => newPoint.X + newSize.Width >= obstacle.x && newPoint.X <= obstacle.x + obstacle.size.Width));
             obs.size = newSize;
             obs.x = newPoint.X; obs.y = newPoint.Y;
+
+            CreateRegion(obs, obs.fileName);
+        }
+
+        private static void CreateRegion(Obstacle obs, string fileName)
+        {
+            obs.path = new GraphicsPath();
+            switch (fileName)
+            {
+                case "1":
+                    obs.path.AddPolygon(new Point[] { new Point(obs.x, obs.y), new Point(obs.x, obs.y + obs.size.Height), new Point(obs.x + obs.size.Width, obs.y + obs.size.Height), new Point(obs.x + obs.size.Width, obs.y) });
+                    obs.region = new Region(obs.path);
+                    break;
+                case "2":
+                    obs.path.AddPolygon(new Point[] { new Point(obs.x, obs.y), new Point(obs.x + obs.size.Width / 2, obs.y + obs.size.Height), new Point(obs.x + obs.size.Width, obs.y) });
+                    obs.region = new Region(obs.path);
+                    break;
+                case "3":
+                    obs.path.AddEllipse(new Rectangle(new Point(obs.x, obs.y), obs.size));
+                    obs.region = new Region(obs.path);
+                    break;
+            }
         }
 
         public static void CreateObstacle()

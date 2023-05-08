@@ -17,7 +17,7 @@ namespace Game
 
         public Hearts()
         {
-            sprite = new Bitmap("D:\\GameForUniv\\Game\\ImagesForGame\\Heart.png");
+            sprite = Directory.sprites["Heart.png"];
         }
 
         public void Draw(Graphics gr)

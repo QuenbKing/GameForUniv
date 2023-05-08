@@ -41,36 +41,5 @@ namespace Game
                     break;
             }
         }
-
-        //public static void ActivateSpeedBoost()
-        //{
-        //    if (player.speedBoosts.Count != 0)
-        //    {
-        //        player.speedBoosts.RemoveAt(player.speedBoosts.Count - 1);
-        //        player.speed += 10;
-        //        progressBar.Visible = true;
-        //        var tickCount = 0;
-        //        var timer = new Timer
-        //        {
-        //            Interval = 1
-        //        };
-        //        timer.Tick += (s, ev) =>
-        //        {
-        //            if (tickCount == 750 || ObstaclesController.checker == false)
-        //            {
-        //                progressBar.Value = 0;
-        //                progressBar.Visible = false;
-        //                player.speed = 10;
-        //                timer.Stop();
-        //            }
-        //            else
-        //            {
-        //                progressBar.Value++;
-        //                tickCount++;
-        //            }
-        //        };
-        //        timer.Start();
-        //    }
-        //}
     }
 }

@@ -8,3 +8,14 @@ E:\GameForUniv\Game\obj\Release\Game.csproj.GenerateResource.cache
 E:\GameForUniv\Game\obj\Release\Game.csproj.CoreCompileInputs.cache
 E:\GameForUniv\Game\obj\Release\Game.exe
 E:\GameForUniv\Game\obj\Release\Game.pdb
+D:\GameForUniv\Game\bin\Release\Game.exe.config
+D:\GameForUniv\Game\bin\Release\Game.exe
+D:\GameForUniv\Game\bin\Release\Game.pdb
+D:\GameForUniv\Game\obj\Release\Game.csproj.AssemblyReference.cache
+D:\GameForUniv\Game\obj\Release\Game.csproj.SuggestedBindingRedirects.cache
+D:\GameForUniv\Game\obj\Release\Game.Form1.resources
+D:\GameForUniv\Game\obj\Release\Game.StartScreen.resources
+D:\GameForUniv\Game\obj\Release\Game.csproj.GenerateResource.cache
+D:\GameForUniv\Game\obj\Release\Game.csproj.CoreCompileInputs.cache
+D:\GameForUniv\Game\obj\Release\Game.exe
+D:\GameForUniv\Game\obj\Release\Game.pdb
