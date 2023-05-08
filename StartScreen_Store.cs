@@ -9,16 +9,17 @@ namespace Game
         private void OpenStore(object sender, EventArgs e)
         {
             Controls.Clear();
-            BackgroundImage = Directory.sprites["backImg3.png"];
+            BackgroundImage = ResizeImage(Directory.sprites["backImg3.png"], Screen.PrimaryScreen.Bounds.Size);
             InitStoreButtons();
         }
 
         private void InitStoreButtons()
         {
+
             var exit = new Button
             {
                 Location = new Point(0, 0),
-                Size = new Size(150, 40),
+                Size = new Size(Size.Width/12, Size.Height/27),
                 Text = "back",
                 BackColor = Color.White
             };
@@ -26,8 +27,8 @@ namespace Game
             exit.Click += (s, ev) => Init();
             var hp = new Button
             {
-                Location = new Point(400, 30),
-                Size = new Size(100, 50),
+                Location = new Point(Size.Width * 10 / 48, Size.Height/36),
+                Size = new Size(Size.Width/19, Size.Height/22),
                 Text = "+ 1 heart",
                 BackColor = Color.White
             };
@@ -42,8 +43,8 @@ namespace Game
             Controls.Add(hp);
             var boost = new Button
             {
-                Location = new Point(1215, 365),
-                Size = new Size(100, 50),
+                Location = new Point(Size.Width * 50/79, Size.Height * 105/295),
+                Size = new Size(Size.Width / 19, Size.Height / 22),
                 Text = "+ 1 speedBoost",
                 BackColor = Color.White
             };

@@ -106,6 +106,7 @@
     <Content Include="GameImages\Money.png" />
     <Content Include="GameImages\oblaka2.png" />
     <Content Include="GameImages\Obuchenie.png" />
+    <Content Include="GameImages\Obuchenie2.png" />
     <Content Include="GameImages\Pause2.png" />
     <Content Include="GameImages\scores.png" />
     <Content Include="GameImages\speed.png" />

@@ -58,20 +58,21 @@ namespace Game
             HighScore.Location = new Point(image.Location.X, exitButton.Bottom + Height / 20);
             HighScore.Size = Size = new Size(200, image.Height / 4);
             Money.Location = new Point(image.Location.X, HighScore.Bottom);
-            Money.Size = new Size(130, image.Height / 4);
+            Money.Size = new Size(160, image.Height / 4);
         }
 
+        private Bitmap ResizeImage(Image oldImage, Size size) => new Bitmap(oldImage, size);
         private void LoadGame(object sender, EventArgs e)
         {
             Controls.Clear();
             if(startFormCount == 1)
             {
                 startFormCount++;
-                BackgroundImage = Directory.sprites["Obuchenie.png"];
+                BackgroundImage = ResizeImage(Directory.sprites["Obuchenie2.png"], Screen.PrimaryScreen.Bounds.Size);
                 var ok = new Button
                 {
                     Location = new Point(Width / 2, Height * 6/7),
-                    Size = new Size(150, 40),
+                    Size = new Size(Size.Width/12, Size.Height/27),
                     Text = "OK",
                     BackColor = Color.White
                 };

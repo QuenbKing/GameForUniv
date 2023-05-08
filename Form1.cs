@@ -37,14 +37,14 @@ namespace Game
             ObstaclesController.score = 0;
             playerImg = Directory.sprites["VinniPuhSmall_2-transformed.png"];
             player = new Player(new Size(playerImg.Width / 2, playerImg.Height), Width / 2 - playerImg.Width / 2, Height / 2, playerImg);
-            background = Directory.sprites["oblaka2.png"];
+            background = ResizeImage(Directory.sprites["oblaka2.png"], Screen.PrimaryScreen.Bounds.Size);
             StartDraw = 0;
             Paint += new PaintEventHandler(OnPaint);
             Keyboard();
 
             scores = new Label
             {
-                Size = new Size(150, 30),
+                Size = new Size(Size.Width/12, Size.Height/36),
                 Font = new Font("Tahoma", 20),
                 Text = $"{ObstaclesController.score}",
                 TextAlign = ContentAlignment.TopCenter,
@@ -58,7 +58,7 @@ namespace Game
             SpeedBoostProgress = new ProgressBar
             {
                 Location = new Point(0, scores.Bottom + scores.Height),
-                Size = new Size(200, 20),
+                Size = new Size(Size.Width/10, Size.Height/54),
                 Style = ProgressBarStyle.Blocks,
                 Visible = false,
                 Value = 0,
@@ -78,6 +78,7 @@ namespace Game
                 if (_startDraw > 0) _startDraw -= background.Height;
             }
         }
+        private Bitmap ResizeImage(Image oldImage, Size size) => new Bitmap(oldImage, size);
 
         private void OnPaint(object sender, PaintEventArgs e)
         {
@@ -86,7 +87,7 @@ namespace Game
             {
                 gr.DrawImage(background, 0, StartDraw + background.Height * i);
             }
-            gr.DrawImage(player.playerImage, player.x, player.y, new Rectangle(new Point(80 * player.currFrame), player.size), GraphicsUnit.Pixel);
+            gr.DrawImage(player.playerImage, player.x, player.y, new Rectangle(new Point(player.playerImage.Size.Width/2 * player.currFrame), player.size), GraphicsUnit.Pixel);
             foreach(var obs in ObstaclesController.obstacles)
             {
                 obs.DrawSprite(gr);
