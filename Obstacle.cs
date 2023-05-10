@@ -27,10 +27,10 @@ namespace Game
 
         public bool CheckContactWithPlayer(Player player)
         {
-            if(region.IsVisible(new Point(player.x, player.y))
+            if (region.IsVisible(new Point(player.x + player.size.Width/4, player.y))
                 || region.IsVisible(new Point(player.x + player.size.Width, player.y))
                 || region.IsVisible(new Point(player.x + player.size.Width, player.y + player.size.Height))
-                || region.IsVisible(new Point(player.x, player.y + player.size.Height))
+                || region.IsVisible(new Point(player.x + player.size.Width/4, player.y + player.size.Height))
                 || region.IsVisible(new Point(player.x + player.size.Width / 2, player.y)))
             {
                 return AliveOrDead(player);
@@ -56,6 +56,12 @@ namespace Game
             //    || region.IsVisible(new Point(player.x + player.size.Width / 2, player.y + player.size.Height))
             //    || region.IsVisible(new Point(player.x, player.y + player.size.Height / 2))
             //    || region.IsVisible(new Point(player.x + player.size.Width, player.y + player.size.Height / 2))
+
+            //region.IsVisible(new Point(player.x, player.y))
+            //    || region.IsVisible(new Point(player.x + player.size.Width, player.y))
+            //    || region.IsVisible(new Point(player.x + player.size.Width, player.y + player.size.Height))
+            //    || region.IsVisible(new Point(player.x, player.y + player.size.Height))
+            //    || region.IsVisible(new Point(player.x + player.size.Width / 2, player.y))
         }
 
         private bool AliveOrDead(Player player)

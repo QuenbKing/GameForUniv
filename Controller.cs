@@ -17,7 +17,7 @@ namespace Game
                     }
                     break;
                 case "S":
-                    if (player.y + player.size.Height < Form.ActiveForm.ClientSize.Height - player.size.Height * 0.3)
+                    if (player.y + player.size.Height < Form.ActiveForm.ClientSize.Height)
                     {
                         player.MoveDown();
                     }
@@ -26,7 +26,7 @@ namespace Game
             switch (KeyAD)
             {
                 case "D":
-                    if(player.x + player.size.Width < Form.ActiveForm.ClientSize.Width - player.size.Width * 0.3)
+                    if(player.x + player.size.Width < Form.ActiveForm.ClientSize.Width)
                     {
                         player.MoveRight();
                         player.currFrame = 1;

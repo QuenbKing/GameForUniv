@@ -1,4 +1,5 @@
-﻿using System.Drawing;
+﻿using System;
+using System.Drawing;
 using System.Windows.Forms;
 
 namespace Game
@@ -19,6 +20,7 @@ namespace Game
                 BackColor = Color.White
             };
             Controls.Add(startButton);
+            startButton.Click += new EventHandler(LoadGame);
 
             storeButton = new Button
             {
@@ -28,6 +30,7 @@ namespace Game
                 BackColor = Color.White
             };
             Controls.Add(storeButton);
+            storeButton.Click += new EventHandler(OpenStore);
 
             exitButton = new Button
             {
@@ -37,6 +40,44 @@ namespace Game
                 BackColor = Color.White
             };
             Controls.Add(exitButton);
+            exitButton.Click += new EventHandler(CloseGame);
+        }
+
+        private void LoadGame(object sender, EventArgs e)
+        {
+            Controls.Clear();
+            if (startFormCount == 1)
+            {
+                startFormCount++;
+                BackgroundImage = ResizeImage(Directory.sprites["Obuchenie2.png"], Screen.PrimaryScreen.Bounds.Size);
+                var ok = new Button
+                {
+                    Location = new Point(Width / 2, Height * 6 / 7),
+                    Size = new Size(Size.Width / 12, Size.Height / 27),
+                    Text = "OK",
+                    BackColor = Color.White
+                };
+                Controls.Add(ok);
+                ok.Click += (s, ev) =>
+                {
+                    StartPlay();
+                };
+            }
+            else
+                StartPlay();
+        }
+
+        private void StartPlay()
+        {
+            Hide();
+            Form1 game = new Form1();
+            game.ShowDialog();
+            Dispose();
+        }
+
+        private void CloseGame(object sender, EventArgs e)
+        {
+            Application.Exit();
         }
     }
 }

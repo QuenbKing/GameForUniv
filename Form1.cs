@@ -7,7 +7,7 @@ namespace Game
 {
     public partial class Form1 : Form
     {
-        private static Image playerImg;
+        private static Bitmap playerImg;
         private static Image background;
         private Player player;
         private static KeyEventArgs KeyAD;

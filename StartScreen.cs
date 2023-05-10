@@ -7,7 +7,7 @@ namespace Game
     public partial class StartScreen : Form
     {
         private static PictureBox image;
-        private static Image menuImage;
+        private static Bitmap menuImage;
         private static int startFormCount = 1;
         public StartScreen()
         {
@@ -35,12 +35,10 @@ namespace Game
                 BackColor = Color.Transparent,
                 Image = menuImage
             };
+
             Controls.Add(image);
             InitButtons();
             InitStatistics();
-            startButton.Click += new EventHandler(LoadGame);
-            storeButton.Click += new EventHandler(OpenStore);
-            exitButton.Click += new EventHandler(CloseGame);
             Resize += new EventHandler(Form_Resize);
         }
 
@@ -62,41 +60,5 @@ namespace Game
         }
 
         private Bitmap ResizeImage(Image oldImage, Size size) => new Bitmap(oldImage, size);
-        private void LoadGame(object sender, EventArgs e)
-        {
-            Controls.Clear();
-            if(startFormCount == 1)
-            {
-                startFormCount++;
-                BackgroundImage = ResizeImage(Directory.sprites["Obuchenie2.png"], Screen.PrimaryScreen.Bounds.Size);
-                var ok = new Button
-                {
-                    Location = new Point(Width / 2, Height * 6/7),
-                    Size = new Size(Size.Width/12, Size.Height/27),
-                    Text = "OK",
-                    BackColor = Color.White
-                };
-                Controls.Add(ok);
-                ok.Click += (s, ev) =>
-                {
-                    StartPlay();
-                };
-            }
-            else
-                StartPlay();
-        }
-
-        private void StartPlay()
-        {
-            Hide();
-            Form1 game = new Form1();
-            game.ShowDialog();
-            Dispose();
-        }
-
-        private void CloseGame(object sender, EventArgs e)
-        {
-            Application.Exit();
-        }
     }
 }
