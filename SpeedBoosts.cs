@@ -16,7 +16,8 @@ namespace Game
 
         public SpeedBoosts()
         {
-            sprite = Directory.sprites["speed.png"];
+            //sprite = Directory.sprites["speed.png"];
+            sprite = CreateImages.ResizeImage(Directory.sprites["speed.png"], new Size((int)(Screen.PrimaryScreen.Bounds.Width / 27.43), Screen.PrimaryScreen.Bounds.Height / 27));
         }
 
         public void Draw(Graphics gr)

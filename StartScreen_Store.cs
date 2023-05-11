@@ -9,7 +9,7 @@ namespace Game
         private void OpenStore(object sender, EventArgs e)
         {
             Controls.Clear();
-            BackgroundImage = ResizeImage(Directory.sprites["backImg3.png"], Screen.PrimaryScreen.Bounds.Size);
+            BackgroundImage = CreateImages.ResizeImage(Directory.sprites["backImg3.png"], Screen.PrimaryScreen.Bounds.Size);
             InitStoreButtons();
         }
 

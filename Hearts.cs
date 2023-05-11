@@ -17,7 +17,8 @@ namespace Game
 
         public Hearts()
         {
-            sprite = Directory.sprites["Heart.png"];
+            //sprite = Directory.sprites["Heart.png"];
+            sprite = CreateImages.ResizeImage(Directory.sprites["Heart.png"], new Size((int)(Screen.PrimaryScreen.Bounds.Width / 37.65), (int)(Screen.PrimaryScreen.Bounds.Height / 21.6)));
         }
 
         public void Draw(Graphics gr)

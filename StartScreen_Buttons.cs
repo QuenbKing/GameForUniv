@@ -49,7 +49,7 @@ namespace Game
             if (startFormCount == 1)
             {
                 startFormCount++;
-                BackgroundImage = ResizeImage(Directory.sprites["Obuchenie2.png"], Screen.PrimaryScreen.Bounds.Size);
+                BackgroundImage = CreateImages.ResizeImage(Directory.sprites["Obuchenie2.png"], Screen.PrimaryScreen.Bounds.Size);
                 var ok = new Button
                 {
                     Location = new Point(Width / 2, Height * 6 / 7),

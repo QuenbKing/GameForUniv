@@ -21,7 +21,8 @@ namespace Game
 
         private void MakeGameOverMenu()
         {
-            var menuImg = Directory.sprites["GameOver.png"];
+            //var menuImg = Directory.sprites["GameOver.png"];
+            var menuImg = CreateImages.ResizeImage(Directory.sprites["GameOver.png"], new Size(Size.Width / 6, Size.Height / 20));
             MakeMenu(ref GameOverMenu, menuImg);
             MakeRestartButton(GameOverMenu);
             MakeExitToMenuButton(GameOverMenu, Restart);

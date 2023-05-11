@@ -59,15 +59,19 @@ namespace Game
             switch (obs.fileName)
             {
                 case "1":
-                    width = rnd.Next(102, 205);
-                    height = rnd.Next(31, 62);
+                    //width = rnd.Next(102, 205);
+                    //height = rnd.Next(31, 62);
+                    width = rnd.Next(Screen.PrimaryScreen.Bounds.Width / 19, (int)(Screen.PrimaryScreen.Bounds.Width / 9.5));
+                    height = rnd.Next(Screen.PrimaryScreen.Bounds.Height / 35, (int)(Screen.PrimaryScreen.Bounds.Height / 17.5));
                     break;
                 case "2":
-                    width = rnd.Next(100, 160);
+                    //width = rnd.Next(100, 160);
+                    width = rnd.Next(Screen.PrimaryScreen.Bounds.Width / 19, Screen.PrimaryScreen.Bounds.Width / 12);
                     height = width;
                     break;
                 case "3":
-                    width = rnd.Next(115, 200);
+                    //width = rnd.Next(115, 200);
+                    width = rnd.Next((int)(Screen.PrimaryScreen.Bounds.Width / 16.7), (int)(Screen.PrimaryScreen.Bounds.Width / 9.6));
                     height = width;
                     break;
             }

@@ -35,21 +35,23 @@ namespace Game
             ObstaclesController.CreateObstacle();
             CoinsController.CreateCoins();
             ObstaclesController.score = 0;
-            playerImg = Directory.sprites["VinniPuhSmall_2-transformed.png"];
+            //playerImg = Directory.sprites["VinniPuhSmall_2-transformed.png"];
+            playerImg = CreateImages.ResizeImage(Directory.sprites["VinniPuhSmall_2-transformed.png"], new Size(Size.Width / 8, (int)(Size.Height / 4.5)));
             player = new Player(new Size(playerImg.Width / 2, playerImg.Height), Width / 2 - playerImg.Width / 2, Height / 2, playerImg);
-            background = ResizeImage(Directory.sprites["oblaka2.png"], Screen.PrimaryScreen.Bounds.Size);
+            background = CreateImages.ResizeImage(Directory.sprites["oblaka2.png"], Screen.PrimaryScreen.Bounds.Size);
             StartDraw = 0;
             Paint += new PaintEventHandler(OnPaint);
             Keyboard();
 
             scores = new Label
             {
-                Size = new Size(Size.Width/12, Size.Height/36),
+                Size = new Size(Size.Width / 12, Size.Height / 36),
                 Font = new Font("Tahoma", 20),
                 Text = $"{ObstaclesController.score}",
                 TextAlign = ContentAlignment.TopCenter,
                 Location = new Point(0, 0),
-                Image = Directory.sprites["scores.png"],
+                //Image = Directory.sprites["scores.png"],
+                Image = CreateImages.ResizeImage(Directory.sprites["scores.png"], new Size(Size.Width / 40, Size.Height / 31)),
                 ImageAlign = ContentAlignment.TopLeft,
                 BackColor = Color.Transparent
             };
@@ -78,7 +80,6 @@ namespace Game
                 if (_startDraw > 0) _startDraw -= background.Height;
             }
         }
-        private Bitmap ResizeImage(Image oldImage, Size size) => new Bitmap(oldImage, size);
 
         private void OnPaint(object sender, PaintEventArgs e)
         {

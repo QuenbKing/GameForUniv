@@ -58,7 +58,5 @@ namespace Game
             Money.Location = new Point(image.Location.X, HighScore.Bottom);
             Money.Size = new Size(160, image.Height / 4);
         }
-
-        private Bitmap ResizeImage(Image oldImage, Size size) => new Bitmap(oldImage, size);
     }
 }
