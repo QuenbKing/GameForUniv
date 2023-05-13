@@ -26,7 +26,8 @@ namespace Game
         public void Init()
         {
             WindowState = FormWindowState.Maximized;
-            FormBorderStyle = FormBorderStyle.FixedSingle;
+            FormBorderStyle = FormBorderStyle.None;
+            ControlBox = false;
             Directory.sprites = new Dictionary<string, Bitmap>();
             Directory.MakeDir();
             ObstaclesController.obstacles = new List<Obstacle>();

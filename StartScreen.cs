@@ -18,9 +18,10 @@ namespace Game
         private void Init()
         {
             DoubleBuffered = true;
-            WindowState = FormWindowState.Maximized;
-            FormBorderStyle = FormBorderStyle.FixedSingle;
             Controls.Clear();
+            WindowState = FormWindowState.Maximized;
+            FormBorderStyle = FormBorderStyle.None;
+            ControlBox = false;
             Directory.sprites = new System.Collections.Generic.Dictionary<string, Bitmap>();
             Directory.MakeDir();
             BackgroundImage = null;
@@ -57,6 +58,7 @@ namespace Game
             HighScore.Size = Size = new Size(200, image.Height / 4);
             Money.Location = new Point(image.Location.X, HighScore.Bottom);
             Money.Size = new Size(160, image.Height / 4);
+            Money.Image = CreateImages.ResizeImage(Directory.sprites["Money.png"], new Size(Size.Width / 32, Size.Height / 17));
         }
     }
 }

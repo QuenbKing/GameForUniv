@@ -27,11 +27,15 @@ namespace Game
 
         public bool CheckContactWithPlayer(Player player)
         {
-            if (region.IsVisible(new Point(player.x + player.size.Width/4, player.y))
-                || region.IsVisible(new Point(player.x + player.size.Width, player.y))
-                || region.IsVisible(new Point(player.x + player.size.Width, player.y + player.size.Height))
-                || region.IsVisible(new Point(player.x + player.size.Width/4, player.y + player.size.Height))
-                || region.IsVisible(new Point(player.x + player.size.Width / 2, player.y)))
+            if (region.IsVisible(new Point(player.x + player.size.Width / 4, player.y))
+                || region.IsVisible(new Point(player.x + player.size.Width * 3 / 4, player.y))
+                || region.IsVisible(new Point(player.x + player.size.Width * 3 / 4, player.y + player.size.Height * 4 / 5))
+                || region.IsVisible(new Point(player.x + player.size.Width / 4, player.y + player.size.Height * 4 / 5))
+                || region.IsVisible(new Point(player.x + player.size.Width / 2, player.y))
+                || region.IsVisible(new Point(player.x + player.size.Width / 2, player.y + player.size.Height * 4 / 5))
+                || region.IsVisible(new Point(player.x + player.size.Width / 2, player.y + player.size.Height/2))
+                || region.IsVisible(new Point(player.x + player.size.Width/2, player.y + player.size.Height/3))
+                || region.IsVisible(new Point(player.x + player.size.Width/2, player.y + (int)(player.size.Height/1.5))))
             {
                 return AliveOrDead(player);
             }
