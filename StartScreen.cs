@@ -36,8 +36,8 @@ namespace Game
                 BackColor = Color.Transparent,
                 Image = menuImage
             };
-
             Controls.Add(image);
+
             InitButtons();
             InitStatistics();
             Resize += new EventHandler(Form_Resize);

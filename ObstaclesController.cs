@@ -14,6 +14,7 @@ namespace Game
         public static int score;
         public static int limScore;
         public static int maxScore;
+
         public static void MoveObstacles(Player player)
         {
             foreach (var obstacle in obstacles)

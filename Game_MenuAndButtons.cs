@@ -22,9 +22,7 @@ namespace Game
             Restart.Click += (s, e) =>
             {
                 Controls.Clear();
-                Dispose();
-                Form1 game = new Form1();
-                game.ShowDialog();
+                Init();
             };
         }
 

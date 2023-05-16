@@ -76,7 +76,7 @@ namespace Game
 
         private void MoveTimer_Tick(object sender, EventArgs e)
         {
-            StartDraw += 3;
+            GameView.StartDraw += 3;
             if (KeyAD.KeyData.ToString() != "Z" || KeyWS.KeyData.ToString() != "Z")
             {
                 Controller.player = player;
@@ -124,6 +124,7 @@ namespace Game
         {
             if (SpeedBoostTimerTickCount == 750)
             {
+                BoostActive = false;
                 SpeedBoostProgress.Value = 0;
                 SpeedBoostProgress.Visible = false;
                 player.speed = 10;

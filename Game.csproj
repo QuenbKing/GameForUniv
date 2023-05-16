@@ -37,6 +37,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CreateImages.cs" />
+    <Compile Include="GameView.cs" />
+    <Compile Include="Game_Boosts.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Game_GameOver.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -44,6 +48,9 @@
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Game_Pause.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Game_ScoresAndObstacles.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Game_Timers.cs">
@@ -114,23 +121,6 @@
     <Content Include="GameImages\VinniPuhSmall 2.png" />
     <Content Include="GameImages\VinniPuhSmall_2-transformed.png" />
     <Content Include="GameImages\vinniUmer.png" />
-    <Content Include="GameOver\GameOver.png" />
-    <Content Include="GamePause\Pause.png" />
-    <Content Include="GamePause\Pause2.png" />
-    <Content Include="ImagesForGame\Heart.png" />
-    <Content Include="ImagesForGame\Money.png" />
-    <Content Include="ImagesForGame\oblaka2.png" />
-    <Content Include="ImagesForGame\scores.png" />
-    <Content Include="ImagesForGame\speed.png" />
-    <Content Include="ImagesForGame\VinniPuhSmall 2.png" />
-    <Content Include="ImagesForGame\VinniPuhSmall_2-transformed.png" />
-    <Content Include="ImagesForGame\vinniUmer.png" />
-    <Content Include="Obstacles\1.png" />
-    <Content Include="Obstacles\2.png" />
-    <Content Include="Obstacles\3.png" />
-    <Content Include="StartFormImages\Med.png" />
-    <Content Include="StartFormImages\Obuchenie.png" />
-    <Content Include="StoreImg\backImg3.png" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
