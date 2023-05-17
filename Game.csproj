@@ -56,6 +56,18 @@
     <Compile Include="Game_ScoresAndObstacles.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Game_StartScreen.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Game_StartScreenButtons.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Game_Statistics.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Game_Store.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Game_Timers.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -121,6 +133,7 @@
     <Content Include="GameImages\Pause2.png" />
     <Content Include="GameImages\scores.png" />
     <Content Include="GameImages\speed.png" />
+    <Content Include="GameImages\startScreen.png" />
     <Content Include="GameImages\VinniPuhSmall 2.png" />
     <Content Include="GameImages\VinniPuhSmall_2-transformed.png" />
     <Content Include="GameImages\vinniUmer.png" />

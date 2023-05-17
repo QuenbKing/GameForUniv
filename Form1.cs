@@ -14,20 +14,17 @@ namespace Game
         {
             DoubleBuffered = true;
             InitializeComponent();
-            Init();
-            Paint += new PaintEventHandler(OnPaint);
+            InitStartScreen();
         }
 
 
         public void Init()
         {
-            WindowState = FormWindowState.Maximized;
-            FormBorderStyle = FormBorderStyle.None;
-            ControlBox = false;
-            Directory.sprites = new Dictionary<string, Bitmap>();
-            Directory.MakeDir();
+            PauseActive = false;
+            BackgroundImage = null;
+            Controls.Clear();
+            GameView.background = CreateImages.ResizeImage(Directory.sprites["oblaka2.png"], Screen.PrimaryScreen.Bounds.Size);
             InitObstaclesAndCoins();
-            view = new GameView();
             //playerImg = Directory.sprites["VinniPuhSmall_2-transformed.png"];
             playerImg = CreateImages.ResizeImage(Directory.sprites["VinniPuhSmall_2-transformed.png"], new Size(Size.Width / 8, (int)(Size.Height / 4.5)));
             player = new Player(new Size(playerImg.Width / 2, playerImg.Height), Width / 2 - playerImg.Width / 2, Height / 2, playerImg);

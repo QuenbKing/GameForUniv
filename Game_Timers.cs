@@ -13,6 +13,7 @@ namespace Game
         private Timer CheckContactTimer;
         private Timer CreateBoosts;
         private Timer SpeedBoostTimer;
+        private Timer InvalidateTimer;
         private static List<Timer> timers;
 
         private int SpeedBoostTimerTickCount;
@@ -50,6 +51,13 @@ namespace Game
             };
             CoinsTimer.Tick += CoinsTimer_Tick;
             timers.Add(CoinsTimer);
+
+            InvalidateTimer = new Timer
+            {
+                Interval = 1
+            };
+            InvalidateTimer.Tick += (s, e) => Invalidate();
+            timers.Add(InvalidateTimer);
 
             CheckContactTimer = new Timer
             {
@@ -100,7 +108,6 @@ namespace Game
 
         private void CoinsTimer_Tick(object sender, EventArgs e)
         {
-            Invalidate();
             CoinsController.CreateCoins();
             CoinsController.MoveCoins(player);
         }

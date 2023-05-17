@@ -10,13 +10,13 @@ namespace Game
 {
     public class GameView
     {
-        private static Image background;
+        public static Image background;
         private static int _startDraw;
 
         public GameView()
         {
             StartDraw = 0;
-            background = CreateImages.ResizeImage(Directory.sprites["oblaka2.png"], Screen.PrimaryScreen.Bounds.Size);
+            background = CreateImages.ResizeImage(Directory.sprites["startScreen.png"], Screen.PrimaryScreen.Bounds.Size);
         }
 
         public static int StartDraw

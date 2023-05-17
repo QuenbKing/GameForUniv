@@ -72,10 +72,12 @@ namespace Game
             Controls.Add(Menu);
             Menu.Click += (s, e) =>
             {
+                player.speedBoosts.Clear();
+                player.hearts.Clear();
+                ObstaclesController.obstacles.Clear();
+                CoinsController.coinsList.Clear();
                 Controls.Clear();
-                Dispose();
-                StartScreen screen = new StartScreen();
-                screen.ShowDialog();
+                InitStartScreen();
             };
         }
     }

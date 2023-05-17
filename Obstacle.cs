@@ -33,9 +33,9 @@ namespace Game
                 || region.IsVisible(new Point(player.x + player.size.Width / 4, player.y + player.size.Height * 4 / 5))
                 || region.IsVisible(new Point(player.x + player.size.Width / 2, player.y))
                 || region.IsVisible(new Point(player.x + player.size.Width / 2, player.y + player.size.Height * 4 / 5))
-                || region.IsVisible(new Point(player.x + player.size.Width / 2, player.y + player.size.Height/2))
-                || region.IsVisible(new Point(player.x + player.size.Width/2, player.y + player.size.Height/3))
-                || region.IsVisible(new Point(player.x + player.size.Width/2, player.y + (int)(player.size.Height/1.5))))
+                || region.IsVisible(new Point(player.x + player.size.Width / 2, player.y + player.size.Height / 2))
+                || region.IsVisible(new Point(player.x + player.size.Width / 2, player.y + player.size.Height / 3))
+                || region.IsVisible(new Point(player.x + player.size.Width / 2, player.y + (int)(player.size.Height / 1.5))))
             {
                 return AliveOrDead(player);
             }

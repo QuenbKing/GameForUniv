@@ -4,12 +4,13 @@ using System.Windows.Forms;
 
 namespace Game
 {
-    public partial class StartScreen : Form
+    public partial class Form1 : Form
     {
         private void OpenStore(object sender, EventArgs e)
         {
             Controls.Clear();
-            BackgroundImage = CreateImages.ResizeImage(Directory.sprites["backImg3.png"], Screen.PrimaryScreen.Bounds.Size);
+            GameView.background = CreateImages.ResizeImage(Directory.sprites["backImg3.png"], Screen.PrimaryScreen.Bounds.Size);
+            BackgroundImage = GameView.background;
             InitStoreButtons();
         }
 
@@ -19,7 +20,7 @@ namespace Game
             var exit = new Button
             {
                 Location = new Point(0, 0),
-                Size = new Size(Size.Width/12, Size.Height/27),
+                Size = new Size(Size.Width / 12, Size.Height / 27),
                 Text = "back",
                 BackColor = Color.White
             };
@@ -27,8 +28,8 @@ namespace Game
             exit.Click += (s, ev) => InitStartScreen();
             var hp = new Button
             {
-                Location = new Point(Size.Width * 10 / 48, Size.Height/36),
-                Size = new Size(Size.Width/19, Size.Height/22),
+                Location = new Point(Size.Width * 10 / 48, Size.Height / 36),
+                Size = new Size(Size.Width / 19, Size.Height / 22),
                 Text = "+ 1 heart",
                 BackColor = Color.White
             };
@@ -43,7 +44,7 @@ namespace Game
             Controls.Add(hp);
             var boost = new Button
             {
-                Location = new Point(Size.Width * 50/79, Size.Height * 105/295),
+                Location = new Point(Size.Width * 50 / 79, Size.Height * 105 / 295),
                 Size = new Size(Size.Width / 19, Size.Height / 22),
                 Text = "+ 1 speedBoost",
                 BackColor = Color.White

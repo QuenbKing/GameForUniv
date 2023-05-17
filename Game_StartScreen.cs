@@ -1,31 +1,26 @@
 ﻿using System;
 using System.Drawing;
 using System.Windows.Forms;
+using System.Collections.Generic;
 
 namespace Game
 {
-    public partial class StartScreen : Form
+    public partial class Form1: Form
     {
         private static PictureBox image;
         private static Bitmap menuImage;
         private static int startFormCount = 1;
-        public StartScreen()
-        {
-            InitializeComponent();
-            InitStartScreen();
-        }
 
         private void InitStartScreen()
         {
-            DoubleBuffered = true;
             Controls.Clear();
             WindowState = FormWindowState.Maximized;
             FormBorderStyle = FormBorderStyle.None;
             ControlBox = false;
-            Directory.sprites = new System.Collections.Generic.Dictionary<string, Bitmap>();
+            Directory.sprites = new Dictionary<string, Bitmap>();
             Directory.MakeDir();
-            BackgroundImage = null;
-            BackColor = Color.LightSkyBlue;
+            view = new GameView();
+            BackgroundImage = GameView.background;
             menuImage = Directory.sprites["Med.png"];
 
             image = new PictureBox
