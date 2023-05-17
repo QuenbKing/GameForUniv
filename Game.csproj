@@ -41,6 +41,9 @@
     <Compile Include="Game_Boosts.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Game_Controller.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Game_GameOver.cs">
       <SubType>Form</SubType>
     </Compile>

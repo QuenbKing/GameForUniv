@@ -4,6 +4,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace Game
 {
@@ -17,7 +18,7 @@ namespace Game
         public Coins()
         {
             size = new Size(100, 75);
-            sprite = Directory.sprites["Money.png"];
+            sprite = CreateImages.ResizeImage(Directory.sprites["Money.png"], new Size((int)(Screen.PrimaryScreen.Bounds.Width / 38.4), (int)(Screen.PrimaryScreen.Bounds.Height / 19.3)));
             speed = 14;
         }
 

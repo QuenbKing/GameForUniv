@@ -9,8 +9,6 @@ namespace Game
     {
         private static Bitmap playerImg;
         private Player player;
-        private static KeyEventArgs KeyAD;
-        private static KeyEventArgs KeyWS;
         private GameView view;
         public Form1()
         {
@@ -48,30 +46,6 @@ namespace Game
             view.DrawCoins(gr);
             view.DrawHearts(gr, player);
             view.DrawSpeedBoosts(gr, player);
-        }
-
-        private void Keyboard()
-        {
-            KeyAD = new KeyEventArgs(Keys.Z);
-            KeyWS = new KeyEventArgs(Keys.Z);
-            KeyDown += (s, e) =>
-            {
-                if (e.KeyData.ToString() == "W" || e.KeyData.ToString() == "S")
-                    KeyWS = e;
-                else if (e.KeyData.ToString() == "A" || e.KeyData.ToString() == "D")
-                    KeyAD = e;
-                if (e.KeyData.ToString() == "F")
-                    ActivateSpeedBoost();
-            };
-            KeyUp += (s, e) =>
-            {
-                if ((e.KeyData.ToString() == "W" && KeyWS.KeyData.ToString() != "S") || (e.KeyData.ToString() == "S" && KeyWS.KeyData.ToString() != "W"))
-                    KeyWS = new KeyEventArgs(Keys.Z);
-                else if ((e.KeyData.ToString() == "A" && KeyAD.KeyData.ToString() != "D") || (e.KeyData.ToString() == "D" && KeyAD.KeyData.ToString() != "A"))
-                    KeyAD = new KeyEventArgs(Keys.Z);
-                if (e.KeyData.ToString() == "Escape" && !PauseActive)
-                    GoToPause();
-            };
         }
     }
 }
