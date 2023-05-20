@@ -72,10 +72,12 @@ namespace Game
             Controls.Add(Menu);
             Menu.Click += (s, e) =>
             {
+                player.x = Screen.PrimaryScreen.Bounds.Width + player.size.Width;
                 player.speedBoosts.Clear();
                 player.hearts.Clear();
                 ObstaclesController.obstacles.Clear();
                 CoinsController.coinsList.Clear();
+                BulletController.Bullets.Clear();
                 Controls.Clear();
                 InitStartScreen();
             };

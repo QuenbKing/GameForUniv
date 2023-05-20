@@ -15,7 +15,6 @@ D:\GameForUniv\Game\bin\Debug\Game.pdb
 D:\GameForUniv\Game\obj\Debug\Game.csproj.AssemblyReference.cache
 D:\GameForUniv\Game\obj\Debug\Game.csproj.SuggestedBindingRedirects.cache
 D:\GameForUniv\Game\obj\Debug\Game.Form1.resources
-D:\GameForUniv\Game\obj\Debug\Game.StartScreen.resources
 D:\GameForUniv\Game\obj\Debug\Game.csproj.GenerateResource.cache
 D:\GameForUniv\Game\obj\Debug\Game.csproj.CoreCompileInputs.cache
 D:\GameForUniv\Game\obj\Debug\Game.exe

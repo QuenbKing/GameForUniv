@@ -28,7 +28,7 @@ namespace Game
             }
         }
 
-        public static void CheckContact(Player player)
+        public static void CheckContactWithPlayer(Player player)
         {
             foreach(var obstacle in obstacles)
             {
@@ -36,6 +36,18 @@ namespace Game
                 {
                     //player.playerImage = new Bitmap("D:\\GameForUniv\\Game\\ImagesForGame\\vinniUmer.png");
                     checker = false;
+                }
+            }
+        }
+
+        public static void CheckContactWithBullet(Bullet bullet)
+        {
+            foreach (var obstacle in obstacles)
+            {
+                if (obstacle.ContactWithBullet(bullet))
+                {
+                    ReCreateImage(obstacle, 0, 0, new Random());
+                    BulletController.Bullets.Remove(bullet);
                 }
             }
         }
@@ -80,7 +92,8 @@ namespace Game
             do
             {
                 newSize = new Size(width, height);
-                newPoint = new Point(rnd.Next(0, Screen.PrimaryScreen.Bounds.Width - width), -rnd.Next(200, 650));
+                newPoint = new Point(rnd.Next(0, Screen.PrimaryScreen.Bounds.Width - width), 
+                    -rnd.Next((int)(Screen.PrimaryScreen.Bounds.Height/5.4), (int)(Screen.PrimaryScreen.Bounds.Height/1.67)));
             } while (obstacles.Any(obstacle => newPoint.X + newSize.Width >= obstacle.x && newPoint.X <= obstacle.x + obstacle.size.Width));
             obs.size = newSize;
             obs.x = newPoint.X; obs.y = newPoint.Y;

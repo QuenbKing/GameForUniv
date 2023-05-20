@@ -36,9 +36,14 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Bullet.cs" />
+    <Compile Include="BulletController.cs" />
     <Compile Include="CreateImages.cs" />
     <Compile Include="GameView.cs" />
     <Compile Include="Game_Boosts.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Game_Bullets.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Game_Controller.cs">
@@ -87,21 +92,6 @@
     <Compile Include="ObstaclesController.cs" />
     <Compile Include="Programm.cs" />
     <Compile Include="SpeedBoosts.cs" />
-    <Compile Include="StartScreen.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="StartScreen.Designer.cs">
-      <DependentUpon>StartScreen.cs</DependentUpon>
-    </Compile>
-    <Compile Include="StartScreen_Buttons.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="StartScreen_Statisctics.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="StartScreen_Store.cs">
-      <SubType>Form</SubType>
-    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -114,15 +104,13 @@
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="StartScreen.resx">
-      <DependentUpon>StartScreen.cs</DependentUpon>
-    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <Content Include="GameImages\1.png" />
     <Content Include="GameImages\2.png" />
     <Content Include="GameImages\3.png" />
     <Content Include="GameImages\backImg3.png" />
+    <Content Include="GameImages\bullet.png" />
     <Content Include="GameImages\GameOver.png" />
     <Content Include="GameImages\Heart.png" />
     <Content Include="GameImages\Med.png" />

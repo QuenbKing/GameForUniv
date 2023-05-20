@@ -12,7 +12,7 @@ namespace Game
             BoostActive = false;
             SpeedBoostProgress = new ProgressBar
             {
-                Location = new Point(0, scores.Bottom + scores.Height),
+                Location = new Point(0, (int)(Size.Height/1.1)),
                 Size = new Size(Size.Width / 10, Size.Height / 54),
                 Style = ProgressBarStyle.Blocks,
                 Visible = false,

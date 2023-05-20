@@ -24,7 +24,8 @@ namespace Game
         private static void CreatePosition(Coins coin)
         {
             var rnd = new Random();
-            coin.location = new Point(rnd.Next(0, Screen.PrimaryScreen.Bounds.Width - coin.size.Width), -rnd.Next(200, 650));
+            coin.location = new Point(rnd.Next(0, Screen.PrimaryScreen.Bounds.Width - coin.size.Width),
+                -rnd.Next((int)(Screen.PrimaryScreen.Bounds.Height / 5.4), (int)(Screen.PrimaryScreen.Bounds.Height / 1.67)));
         }
 
         public static void MoveCoins(Player player)

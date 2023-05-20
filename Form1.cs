@@ -20,6 +20,7 @@ namespace Game
 
         public void Init()
         {
+            BulletActive = false;
             PauseActive = false;
             BackgroundImage = null;
             Controls.Clear();
@@ -28,8 +29,9 @@ namespace Game
             //playerImg = Directory.sprites["VinniPuhSmall_2-transformed.png"];
             playerImg = CreateImages.ResizeImage(Directory.sprites["VinniPuhSmall_2-transformed.png"], new Size(Size.Width / 8, (int)(Size.Height / 4.5)));
             player = new Player(new Size(playerImg.Width / 2, playerImg.Height), Width / 2 - playerImg.Width / 2, Height / 2, playerImg);
-            Keyboard();
             InitScores();
+            InitBullets();
+            Keyboard();
             InitSpeedBoostProgress();
             IntializeTimers();
         }
@@ -43,6 +45,7 @@ namespace Game
             view.DrawCoins(gr);
             view.DrawHearts(gr, player);
             view.DrawSpeedBoosts(gr, player);
+            view.DrawBullets(gr);
         }
     }
 }

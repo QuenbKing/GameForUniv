@@ -49,7 +49,7 @@ namespace Game
             {
                 Interval = 10
             };
-            CoinsTimer.Tick += CoinsTimer_Tick;
+            CoinsTimer.Tick += CoinsAndBulletTimer_Tick;
             timers.Add(CoinsTimer);
 
             InvalidateTimer = new Timer
@@ -106,15 +106,19 @@ namespace Game
             ObstaclesController.SpeedUp();
         }
 
-        private void CoinsTimer_Tick(object sender, EventArgs e)
+        private void CoinsAndBulletTimer_Tick(object sender, EventArgs e)
         {
             CoinsController.CreateCoins();
             CoinsController.MoveCoins(player);
+            BulletController.MoveBullet();
         }
 
         private void CheckContactTimer_Tick(object sender, EventArgs e)
         {
-            ObstaclesController.CheckContact(player);
+            ObstaclesController.CheckContactWithPlayer(player);
+            if (BulletController.Bullets.Count != 0)
+            for(int i = 0;  i < BulletController.Bullets.Count; i++)
+                    ObstaclesController.CheckContactWithBullet(BulletController.Bullets[i]);
         }
 
         private void CreateBoostsTimer_Tick(object sender, EventArgs e)

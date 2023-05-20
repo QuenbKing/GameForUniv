@@ -76,5 +76,16 @@ namespace Game
                 gr.DrawImage(background, 0, StartDraw + background.Height * i);
             }
         }
+
+        public void DrawBullets(Graphics gr)
+        {
+            if (BulletController.Bullets.Count > 0)
+            {
+                foreach (var bullet in BulletController.Bullets)
+                {
+                    bullet.Draw(gr);
+                }
+            }
+        }
     }
 }
