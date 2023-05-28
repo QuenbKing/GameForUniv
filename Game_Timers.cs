@@ -73,19 +73,12 @@ namespace Game
             SpeedBoostTimer.Tick += SpeedBoostTimer_Tick;
 
             StartTimers();
-
-            CreateBoosts = new Timer
-            {
-                Interval = 10
-            };
-            CreateBoosts.Tick += CreateBoostsTimer_Tick;
-            CreateBoosts.Start();
         }
 
         private void MoveTimer_Tick(object sender, EventArgs e)
         {
             GameView.StartDraw += 3;
-            if (KeyAD.KeyData.ToString() != "Z" || KeyWS.KeyData.ToString() != "Z")
+            if (KeyAD.KeyData.ToString() != "None" || KeyWS.KeyData.ToString() != "None")
             {
                 Controller.player = player;
                 Controller.Move(KeyWS.KeyData.ToString(), KeyAD.KeyData.ToString());
@@ -119,16 +112,6 @@ namespace Game
             if (BulletController.Bullets.Count != 0)
             for(int i = 0;  i < BulletController.Bullets.Count; i++)
                     ObstaclesController.CheckContactWithBullet(BulletController.Bullets[i]);
-        }
-
-        private void CreateBoostsTimer_Tick(object sender, EventArgs e)
-        {
-            if (ActiveForm != null)
-            {
-                player.CreateHearts(Player.heartsCount);
-                player.CreateBoosts(Player.speedBoostCount);
-                CreateBoosts.Stop();
-            }
         }
 
         private void SpeedBoostTimer_Tick(object sender, EventArgs e)

@@ -9,6 +9,8 @@ namespace Game
         private bool BoostActive;
         private void InitSpeedBoostProgress()
         {
+            player.CreateHearts(Player.heartsCount);
+            player.CreateBoosts(Player.speedBoostCount);
             BoostActive = false;
             SpeedBoostProgress = new ProgressBar
             {

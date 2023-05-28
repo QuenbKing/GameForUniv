@@ -9,8 +9,8 @@ namespace Game
 
         private void Keyboard()
         {
-            KeyAD = new KeyEventArgs(Keys.Z);
-            KeyWS = new KeyEventArgs(Keys.Z);
+            KeyAD = new KeyEventArgs(Keys.None);
+            KeyWS = new KeyEventArgs(Keys.None);
             KeyDown += (s, e) => CheckKeyDown(e);
             KeyUp += (s, e) => CheckKeyUp(e);
         }
@@ -34,9 +34,9 @@ namespace Game
         private void CheckKeyUp(KeyEventArgs e)
         {
             if ((e.KeyData.ToString() == "W" && KeyWS.KeyData.ToString() != "S") || (e.KeyData.ToString() == "S" && KeyWS.KeyData.ToString() != "W"))
-                KeyWS = new KeyEventArgs(Keys.Z);
+                KeyWS = new KeyEventArgs(Keys.None);
             else if ((e.KeyData.ToString() == "A" && KeyAD.KeyData.ToString() != "D") || (e.KeyData.ToString() == "D" && KeyAD.KeyData.ToString() != "A"))
-                KeyAD = new KeyEventArgs(Keys.Z);
+                KeyAD = new KeyEventArgs(Keys.None);
             if (e.KeyData.ToString() == "Escape" && !PauseActive)
                 GoToPause();
             if(e.KeyData.ToString() == "E")
