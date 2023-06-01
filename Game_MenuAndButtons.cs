@@ -35,7 +35,7 @@ namespace Game
                 ImageAlign = ContentAlignment.TopCenter
             };
             PauseBox.Size = PauseBox.Image.Size;
-            PauseBox.Location = new Point(Width / 2 - PauseBox.Width / 2, Height / 4 + PauseBox.Height);
+            PauseBox.Location = new Point(Width / 2 - PauseBox.Width / 2, Height / 4 + PauseBox.Height * 2);
         }
 
         private void MakeContinueButton(Label PauseBox)
@@ -51,7 +51,7 @@ namespace Game
             Controls.Add(Continue);
             Continue.Click += (s, e) =>
             {
-                StartTimers();
+                StartSpecialTimers();
                 PauseActive = false;
                 Controls.Remove(PauseBox);
                 Controls.Remove(Continue);
@@ -72,7 +72,7 @@ namespace Game
             Controls.Add(Menu);
             Menu.Click += (s, e) =>
             {
-                player.x = Screen.PrimaryScreen.Bounds.Width + player.size.Width;
+                player.playerImage = null;
                 player.speedBoosts.Clear();
                 player.hearts.Clear();
                 ObstaclesController.obstacles.Clear();

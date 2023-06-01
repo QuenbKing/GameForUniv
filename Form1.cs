@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Media;
 using System.Windows.Forms;
 
 namespace Game
@@ -26,7 +27,6 @@ namespace Game
             Controls.Clear();
             GameView.background = CreateImages.ResizeImage(Directory.sprites["oblaka2.png"], Screen.PrimaryScreen.Bounds.Size);
             InitObstaclesAndCoins();
-            //playerImg = Directory.sprites["VinniPuhSmall_2-transformed.png"];
             playerImg = CreateImages.ResizeImage(Directory.sprites["VinniPuhSmall_2-transformed.png"], new Size(Size.Width / 8, (int)(Size.Height / 4.5)));
             player = new Player(new Size(playerImg.Width / 2, playerImg.Height), Width / 2 - playerImg.Width / 2, Height / 2, playerImg);
             InitScores();

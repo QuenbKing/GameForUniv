@@ -27,7 +27,7 @@ namespace Game
             {
                 BulletActive = true;
                 BulletController.CreateBullets(player);
-                bullets.Text = $"Bullets: {player.bulletCount}";
+                bullets.Text = $"Bullets: {Player.bulletCount}";
             }
         }
 

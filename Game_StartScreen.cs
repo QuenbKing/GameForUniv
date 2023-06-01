@@ -9,7 +9,7 @@ namespace Game
     {
         private static PictureBox image;
         private static Bitmap menuImage;
-        private static int startFormCount = 1;
+        private static int startFormCount;
 
         private void InitStartScreen()
         {

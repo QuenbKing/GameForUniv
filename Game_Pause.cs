@@ -12,7 +12,7 @@ namespace Game
 
         private void GoToPause()
         {
-            StopTimers();
+            StopSpecialTimers();
             if (ObstaclesController.score > ObstaclesController.maxScore)
             {
                 ObstaclesController.maxScore = ObstaclesController.score;

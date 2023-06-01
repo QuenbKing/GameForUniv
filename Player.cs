@@ -16,7 +16,7 @@ namespace Game
         public List<Hearts> hearts;
         public static int speedBoostCount = 1;
         public List<SpeedBoosts> speedBoosts;
-        public int bulletCount;
+        public static int bulletCount;
         //public GraphicsPath path;
         //public Region region;
 
@@ -30,41 +30,26 @@ namespace Game
             hearts = new List<Hearts>();
             speedBoosts = new List<SpeedBoosts>();  
             speed = 10;
-            bulletCount = 10;
         }
-
-        //private void CreateRegion()
-        //{
-        //    path.AddPolygon(new Point[] { new Point(x, y), new Point(x, y + size.Height), new Point(x + size.Width, y + size.Height), new Point(x + size.Width, y) });
-        //    region = new Region(path);
-        //}
 
         public void MoveLeft()
         {
             x -= speed;
-            //path = new GraphicsPath();
-            //CreateRegion();
         }
 
         public void MoveRight()
         {
             x+= speed;
-            //path = new GraphicsPath();
-            //CreateRegion();
         }
 
         public void MoveUp()
         {
             y-= speed;
-            //path = new GraphicsPath();
-            //CreateRegion();
         }
 
         public void MoveDown()
         {
             y+= speed;
-            //path = new GraphicsPath();
-            //CreateRegion();
         }
 
         public void CreateHearts(int countHearts)

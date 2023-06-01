@@ -9,7 +9,7 @@ namespace Game
         private void OpenStore(object sender, EventArgs e)
         {
             Controls.Clear();
-            GameView.background = CreateImages.ResizeImage(Directory.sprites["backImg3.png"], Screen.PrimaryScreen.Bounds.Size);
+            GameView.background = CreateImages.ResizeImage(Directory.sprites["backImg4.png"], Screen.PrimaryScreen.Bounds.Size);
             BackgroundImage = GameView.background;
             InitStoreButtons();
         }
@@ -58,6 +58,22 @@ namespace Game
                 }
             };
             Controls.Add(boost);
+            var bulletsButton = new Button
+            {
+                Location = new Point(Size.Width * 21/100, Size.Height * 23 / 36),
+                Size = new Size(Size.Width / 19, Size.Height / 22),
+                Text = "+ 10 bullets",
+                BackColor = Color.White
+            };
+            bulletsButton.Click += (s, ev) =>
+            {
+                if (CoinsController.money >= 500 && BulletController.maxCountBullet < 30)
+                {
+                    BulletController.maxCountBullet += 10;
+                    CoinsController.money -= 500;
+                }
+            };
+            Controls.Add(bulletsButton);
         }
     }
 }

@@ -10,7 +10,7 @@ namespace Game
 
         private void GameOver()
         {
-            StopTimers();
+            StopSpecialTimers();
             if(ObstaclesController.score > ObstaclesController.maxScore)
             {
                 ObstaclesController.maxScore = ObstaclesController.score;

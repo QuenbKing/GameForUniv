@@ -31,7 +31,8 @@ namespace Game
 
         public void DrawPlayer(Player player, Graphics gr)
         {
-            gr.DrawImage(player.playerImage, player.x, player.y, new Rectangle(new Point(player.playerImage.Size.Width / 2 * player.currFrame), player.size), GraphicsUnit.Pixel);
+            if(player.playerImage != null)
+                gr.DrawImage(player.playerImage, player.x, player.y, new Rectangle(new Point(player.playerImage.Size.Width / 2 * player.currFrame), player.size), GraphicsUnit.Pixel);
         }
         
         public void DrawObstacles(Graphics gr)

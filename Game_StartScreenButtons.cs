@@ -46,7 +46,7 @@ namespace Game
         private void LoadGame(object sender, EventArgs e)
         {
             Controls.Clear();
-            if (startFormCount == 1)
+            if (startFormCount == 0)
             {
                 startFormCount++;
                 BackgroundImage = CreateImages.ResizeImage(Directory.sprites["Obuchenie.png"], Screen.PrimaryScreen.Bounds.Size);

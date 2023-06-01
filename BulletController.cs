@@ -6,6 +6,7 @@ namespace Game
     public class BulletController
     {
         public static List<Bullet> Bullets;
+        public static int maxCountBullet = 10;
 
         public static void MoveBullet()
         {
@@ -19,12 +20,12 @@ namespace Game
 
         public static void CreateBullets(Player player)
         {
-            if(player.bulletCount != 0) 
+            if(Player.bulletCount != 0) 
             {
                 Bullet bullet = new Bullet();
                 bullet.position = new Point(player.x + player.size.Width / 2, player.y);
                 Bullets.Add(bullet);
-                player.bulletCount -= 1;
+                Player.bulletCount -= 1;
             }
         }
     }

@@ -11,9 +11,9 @@ namespace Game
         private Timer ObstaclesSpeedAndScoreTimer;
         private Timer CoinsTimer;
         private Timer CheckContactTimer;
-        private Timer CreateBoosts;
         private Timer SpeedBoostTimer;
         private Timer InvalidateTimer;
+        //private Timer WinTimer;
         private static List<Timer> timers;
 
         private int SpeedBoostTimerTickCount;
@@ -52,13 +52,6 @@ namespace Game
             CoinsTimer.Tick += CoinsAndBulletTimer_Tick;
             timers.Add(CoinsTimer);
 
-            InvalidateTimer = new Timer
-            {
-                Interval = 1
-            };
-            InvalidateTimer.Tick += (s, e) => Invalidate();
-            timers.Add(InvalidateTimer);
-
             CheckContactTimer = new Timer
             {
                 Interval = 10
@@ -66,14 +59,44 @@ namespace Game
             CheckContactTimer.Tick += CheckContactTimer_Tick;
             timers.Add(CheckContactTimer);
 
+            InvalidateTimer = new Timer
+            {
+                Interval = 1
+            };
+            InvalidateTimer.Tick += (s, e) => Invalidate();
+            timers.Add(InvalidateTimer);
+
             SpeedBoostTimer = new Timer
             {
                 Interval = 1
             };
             SpeedBoostTimer.Tick += SpeedBoostTimer_Tick;
 
-            StartTimers();
+            StartSpecialTimers();
         }
+
+        //private void CreateWinTimer()
+        //{
+        //    WinTimer = new Timer
+        //    {
+        //        Interval = 10
+        //    };
+        //    WinTimer.Tick += WinTimer_Tick;
+        //    WinTimer.Start();
+        //}
+
+        //private void WinTimer_Tick(Object sender, EventArgs e)
+        //{
+        //    if (Win.Location.Y < Height / 4 + Win.Height * 2)
+        //        Win.Top += 10;
+        //    else
+        //    {
+        //        MakeContinueButton(Win);
+        //        MakeExitToMenuButton(Win, Continue);
+        //        firstWin = 1;
+        //        WinTimer.Stop();
+        //    }
+        //}
 
         private void MoveTimer_Tick(object sender, EventArgs e)
         {
@@ -97,6 +120,11 @@ namespace Game
             ObstaclesController.score += 2;
             scores.Text = $"{ObstaclesController.score}";
             ObstaclesController.SpeedUp();
+            //if (firstWin == 0 && ObstaclesController.score == 4)
+            //{
+            //    YouWin();
+            //    CreateWinTimer();
+            //}
         }
 
         private void CoinsAndBulletTimer_Tick(object sender, EventArgs e)
@@ -133,13 +161,13 @@ namespace Game
             }
         }
 
-        private void StartTimers()
+        private void StartSpecialTimers()
         {
             foreach(var timer in timers)
                 timer.Start();
         }
 
-        private void StopTimers()
+        private void StopSpecialTimers()
         {
             foreach(var timer in timers)
                 timer.Stop();

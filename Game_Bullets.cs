@@ -11,12 +11,13 @@ namespace Game
 
         private void InitBullets()
         {
+            Player.bulletCount = BulletController.maxCountBullet;
             BulletController.Bullets = new List<Bullet>();
             bullets = new Label
             {
                 Location = new Point(0, scores.Bottom + scores.Height),
                 Font = new Font("Times New Roman", 20),
-                Text = $"Bullets: {player.bulletCount}",
+                Text = $"Bullets: {Player.bulletCount}",
                 Size = new Size(Size.Width/13, Size.Height/11),
                 BackColor = Color.Transparent
             };

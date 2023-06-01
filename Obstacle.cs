@@ -89,7 +89,7 @@ namespace Game
 
         public bool ContactWithBullet(Bullet bullet)
         {
-            if (region.IsVisible(new Point(bullet.position.X + bullet.size.Width / 2, bullet.position.Y + bullet.size.Height/2)))
+            if (region.IsVisible(new Point(bullet.position.X + bullet.size.Width / 2, bullet.position.Y + bullet.size.Height/3)))
                 return true;
             return false;
         }

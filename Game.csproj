@@ -76,6 +76,9 @@
     <Compile Include="Game_Timers.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Game_Win.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Hearts.cs" />
     <Compile Include="Coins.cs" />
     <Compile Include="CoinsController.cs" />
@@ -110,6 +113,7 @@
     <Content Include="GameImages\2.png" />
     <Content Include="GameImages\3.png" />
     <Content Include="GameImages\backImg3.png" />
+    <Content Include="GameImages\backImg4.png" />
     <Content Include="GameImages\bullet.png" />
     <Content Include="GameImages\GameOver.png" />
     <Content Include="GameImages\Heart.png" />
@@ -125,6 +129,8 @@
     <Content Include="GameImages\VinniPuhSmall 2.png" />
     <Content Include="GameImages\VinniPuhSmall_2-transformed.png" />
     <Content Include="GameImages\vinniUmer.png" />
+    <Content Include="GameImages\win.png" />
+    <Content Include="GameImages\win2.png" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
