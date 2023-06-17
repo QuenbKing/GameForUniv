@@ -12,6 +12,22 @@
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Deterministic>true</Deterministic>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <PublishUrl>D:\build\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>6</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <PublishWizardCompleted>true</PublishWizardCompleted>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -32,8 +48,21 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <ManifestCertificateThumbprint>8D1EC1E1FAA631726237D1C30A7CB6B2E6863F16</ManifestCertificateThumbprint>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ManifestKeyFile>Game_TemporaryKey.pfx</ManifestKeyFile>
+  </PropertyGroup>
+  <PropertyGroup>
+    <GenerateManifests>true</GenerateManifests>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignManifests>true</SignManifests>
+  </PropertyGroup>
   <ItemGroup>
     <None Include="App.config" />
+    <None Include="Game_TemporaryKey.pfx" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Bullet.cs" />
@@ -112,7 +141,6 @@
     <Content Include="GameImages\1.png" />
     <Content Include="GameImages\2.png" />
     <Content Include="GameImages\3.png" />
-    <Content Include="GameImages\backImg3.png" />
     <Content Include="GameImages\backImg4.png" />
     <Content Include="GameImages\bullet.png" />
     <Content Include="GameImages\GameOver.png" />
@@ -121,17 +149,25 @@
     <Content Include="GameImages\Money.png" />
     <Content Include="GameImages\oblaka2.png" />
     <Content Include="GameImages\Obuchenie.png" />
-    <Content Include="GameImages\Obuchenie2.png" />
     <Content Include="GameImages\Pause2.png" />
     <Content Include="GameImages\scores.png" />
     <Content Include="GameImages\speed.png" />
     <Content Include="GameImages\startScreen.png" />
     <Content Include="GameImages\VinniPuhSmall 2.png" />
     <Content Include="GameImages\VinniPuhSmall_2-transformed.png" />
-    <Content Include="GameImages\vinniUmer.png" />
-    <Content Include="GameImages\win.png" />
     <Content Include="GameImages\win2.png" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <BootstrapperPackage Include=".NETFramework,Version=v4.7.2">
+      <Visible>False</Visible>
+      <ProductName>Microsoft .NET Framework 4.7.2 %28x86 и x64%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

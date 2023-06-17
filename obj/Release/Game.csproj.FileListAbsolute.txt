@@ -18,3 +18,7 @@ D:\GameForUniv\Game\obj\Release\Game.csproj.GenerateResource.cache
 D:\GameForUniv\Game\obj\Release\Game.csproj.CoreCompileInputs.cache
 D:\GameForUniv\Game\obj\Release\Game.exe
 D:\GameForUniv\Game\obj\Release\Game.pdb
+D:\GameForUniv\Game\bin\Release\Game.exe.manifest
+D:\GameForUniv\Game\bin\Release\Game.application
+D:\GameForUniv\Game\obj\Release\Game.exe.manifest
+D:\GameForUniv\Game\obj\Release\Game.application

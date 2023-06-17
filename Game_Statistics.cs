@@ -13,7 +13,7 @@ namespace Game
             HighScore = new Label
             {
                 Location = new Point(image.Location.X, exitButton.Bottom + Height / 20),
-                Size = new Size(200, image.Height / 4),
+                Size = new Size(Size.Width/10, image.Height / 4),
                 Text = $"HighScore:{ObstaclesController.maxScore}",
                 TextAlign = ContentAlignment.MiddleLeft,
                 BackColor = Color.Transparent,
@@ -23,11 +23,10 @@ namespace Game
 
             Money = new Label
             {
-                //Image = Directory.sprites["Money.png"],
                 Image = CreateImages.ResizeImage(Directory.sprites["Money.png"], new Size(Size.Width / 32, Size.Height / 17)),
                 Location = new Point(image.Location.X, HighScore.Bottom),
-                Size = new Size(160, image.Height / 4),
-                Text = $":{CoinsController.money}",
+                Size = new Size(Size.Width/12, image.Height / 4),
+                Text = $"{CoinsController.money}",
                 TextAlign = ContentAlignment.MiddleCenter,
                 Font = new Font("Times New Roman", 20),
                 ImageAlign = ContentAlignment.MiddleLeft,

@@ -13,6 +13,7 @@ namespace Game
 
         private void InitStartScreen()
         {
+            PauseActive = true;
             Controls.Clear();
             WindowState = FormWindowState.Maximized;
             FormBorderStyle = FormBorderStyle.None;
@@ -48,11 +49,10 @@ namespace Game
             storeButton.Size = new Size(image.Width, image.Height / 4);
             exitButton.Location = new Point(image.Location.X, storeButton.Bottom + Height / 20);
             exitButton.Size = new Size(image.Width, image.Height / 4);
-            HighScore.Size = Size = new Size(200, image.Height / 4);
             HighScore.Location = new Point(image.Location.X, exitButton.Bottom + Height / 20);
-            HighScore.Size = Size = new Size(200, image.Height / 4);
+            HighScore.Size = Size = new Size(Size.Width / 10, image.Height / 4);
             Money.Location = new Point(image.Location.X, HighScore.Bottom);
-            Money.Size = new Size(160, image.Height / 4);
+            Money.Size = new Size(Size.Width / 12, image.Height / 4);
             Money.Image = CreateImages.ResizeImage(Directory.sprites["Money.png"], new Size(Size.Width / 32, Size.Height / 17));
         }
     }

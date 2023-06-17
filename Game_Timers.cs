@@ -12,8 +12,8 @@ namespace Game
         private Timer CoinsTimer;
         private Timer CheckContactTimer;
         private Timer SpeedBoostTimer;
-        private Timer InvalidateTimer;
-        //private Timer WinTimer;
+        private Timer WinTimer;
+        private bool firstTickWinTimer;
         private static List<Timer> timers;
 
         private int SpeedBoostTimerTickCount;
@@ -59,13 +59,6 @@ namespace Game
             CheckContactTimer.Tick += CheckContactTimer_Tick;
             timers.Add(CheckContactTimer);
 
-            InvalidateTimer = new Timer
-            {
-                Interval = 1
-            };
-            InvalidateTimer.Tick += (s, e) => Invalidate();
-            timers.Add(InvalidateTimer);
-
             SpeedBoostTimer = new Timer
             {
                 Interval = 1
@@ -75,28 +68,34 @@ namespace Game
             StartSpecialTimers();
         }
 
-        //private void CreateWinTimer()
-        //{
-        //    WinTimer = new Timer
-        //    {
-        //        Interval = 10
-        //    };
-        //    WinTimer.Tick += WinTimer_Tick;
-        //    WinTimer.Start();
-        //}
+        private void CreateWinTimer()
+        {
+            firstTickWinTimer = true;
+            WinTimer = new Timer
+            {
+                Interval = 10,
+            };
+            WinTimer.Tick += WinTimer_Tick;
+            WinTimer.Start();
+        }
 
-        //private void WinTimer_Tick(Object sender, EventArgs e)
-        //{
-        //    if (Win.Location.Y < Height / 4 + Win.Height * 2)
-        //        Win.Top += 10;
-        //    else
-        //    {
-        //        MakeContinueButton(Win);
-        //        MakeExitToMenuButton(Win, Continue);
-        //        firstWin = 1;
-        //        WinTimer.Stop();
-        //    }
-        //}
+        private void WinTimer_Tick(Object sender, EventArgs e)
+        {
+            if (firstTickWinTimer)
+            {
+                firstTickWinTimer = false;
+                StopSpecialTimers();
+            }
+            if (Win.Location.Y < Height / 4 + Win.Height * 2)
+                Win.Top += 10;
+            else
+            {
+                MakeContinueButton(Win);
+                MakeExitToMenuButton(Win, Continue);
+                firstWin = false;
+                WinTimer.Stop();
+            }
+        }
 
         private void MoveTimer_Tick(object sender, EventArgs e)
         {
@@ -110,6 +109,7 @@ namespace Game
 
         private void ObstaclesMoveTimer_Tick(object sender, EventArgs e)
         {
+            Invalidate();
             ObstaclesController.MoveObstacles(player);
             if (ObstaclesController.checker == false)
                 GameOver();
@@ -120,11 +120,11 @@ namespace Game
             ObstaclesController.score += 2;
             scores.Text = $"{ObstaclesController.score}";
             ObstaclesController.SpeedUp();
-            //if (firstWin == 0 && ObstaclesController.score == 4)
-            //{
-            //    YouWin();
-            //    CreateWinTimer();
-            //}
+            if (firstWin && ObstaclesController.score == 400)
+            {
+                YouWin();
+                CreateWinTimer();;
+            }
         }
 
         private void CoinsAndBulletTimer_Tick(object sender, EventArgs e)
